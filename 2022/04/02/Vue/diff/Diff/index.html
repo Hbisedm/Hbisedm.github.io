@@ -16,28 +16,30 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Diff算法Tags: 算法  🆕 **Diff算法是一种对比算法**。对比两者是&#96;旧虚拟DOM和新虚拟DOM&#96;，对比出是哪个&#96;虚拟节点&#96;更改了，找出这个&#96;虚拟节点&#96;，并只更新这个虚拟节点所对应的&#96;真实节点&#96;，而不用更新其他数据没发生改变的节点，实现&#96;精准&#96;地更新真实DOM，进而&#96;提高效率&#96;。    新旧虚拟DOM对比的时候，Diff算法比较只会在同层级进行, 不会跨层级比较。 所以Diff算法">
+    <meta name="description" content="Vue中的diff算法.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hbisedm">
-<meta property="og:url" content="http://example.com/2022/04/03/diff/Diff/index.html">
+<meta property="og:title" content="Vue的Diff算法">
+<meta property="og:url" content="http://example.com/2022/04/02/Vue/diff/Diff/index.html">
 <meta property="og:site_name" content="Hbisedm">
-<meta property="og:description" content="Diff算法Tags: 算法  🆕 **Diff算法是一种对比算法**。对比两者是&#96;旧虚拟DOM和新虚拟DOM&#96;，对比出是哪个&#96;虚拟节点&#96;更改了，找出这个&#96;虚拟节点&#96;，并只更新这个虚拟节点所对应的&#96;真实节点&#96;，而不用更新其他数据没发生改变的节点，实现&#96;精准&#96;地更新真实DOM，进而&#96;提高效率&#96;。    新旧虚拟DOM对比的时候，Diff算法比较只会在同层级进行, 不会跨层级比较。 所以Diff算法">
+<meta property="og:description" content="Vue中的diff算法.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/diff.png">
-<meta property="og:image" content="http://example.com/images/diff1.png">
-<meta property="og:image" content="http://example.com/images/diff2.png">
-<meta property="og:image" content="http://example.com/images/diff3.png">
-<meta property="og:image" content="http://example.com/images/diff4.png">
-<meta property="og:image" content="http://example.com/images/diff5.png">
-<meta property="og:image" content="http://example.com/images/diff6.png">
-<meta property="article:published_time" content="2022-04-03T00:13:46.000Z">
-<meta property="article:modified_time" content="2022-04-05T15:03:59.540Z">
+<meta property="og:image" content="http://example.com/images/diff/diff7.png">
+<meta property="og:image" content="http://example.com/images/diff/diff.png">
+<meta property="og:image" content="http://example.com/images/diff/diff1.png">
+<meta property="og:image" content="http://example.com/images/diff/diff2.png">
+<meta property="og:image" content="http://example.com/images/diff/diff3.png">
+<meta property="og:image" content="http://example.com/images/diff/diff4.png">
+<meta property="og:image" content="http://example.com/images/diff/diff5.png">
+<meta property="og:image" content="http://example.com/images/diff/diff6.png">
+<meta property="article:published_time" content="2022-04-01T17:16:56.000Z">
+<meta property="article:modified_time" content="2022-04-06T07:17:13.989Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/diff.png">
+<meta name="twitter:image" content="http://example.com/images/diff/diff7.png">
   
   
-  <title>Hbisedm</title>
+  <title>Vue的Diff算法 - Hbisedm</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -195,7 +197,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="Vue的Diff算法">
               
             </span>
 
@@ -205,8 +207,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-03 08:13" pubdate>
-        April 3, 2022 am
+      <time datetime="2022-04-02 01:16" pubdate>
+        April 2, 2022 am
       </time>
     </span>
   
@@ -216,7 +218,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      5.9k 字
     </span>
   
 
@@ -225,7 +227,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      51 分钟
+      49 分钟
     </span>
   
 
@@ -262,18 +264,17 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">Vue的Diff算法</h1>
             
             <div class="markdown-body">
-              <h1 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h1><p>Tags: 算法</p>
-<aside>
+              <h1 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h1><aside>
 🆕 **Diff算法是一种对比算法**。对比两者是`旧虚拟DOM和新虚拟DOM`，对比出是哪个`虚拟节点`更改了，找出这个`虚拟节点`，并只更新这个虚拟节点所对应的`真实节点`，而不用更新其他数据没发生改变的节点，实现`精准`地更新真实DOM，进而`提高效率`。
 
 </aside>
 
 <p>新旧虚拟DOM对比的时候，Diff算法比较只会在同层级进行, 不会跨层级比较。 所以Diff算法是:<code>深度优先算法</code>。 时间复杂度:<code>O(n)</code></p>
 <h2 id="如何触发"><a href="#如何触发" class="headerlink" title="如何触发"></a>如何触发</h2><p>当数据改变时，会触发<code>setter</code>，并且通过<code>Dep.notify</code>去通知所有<code>订阅者Watcher</code>，订阅者们就会调用<code>patch方法</code>，给真实DOM打补丁，更新相应的视图。</p>
-<p><a target="_blank" rel="noopener" href="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1db54647698e4c76b6fc38a02067ad72~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1db54647698e4c76b6fc38a02067ad72~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp</a></p>
+<p> <img src="/images/diff/diff7.png" srcset="/img/loading.gif" lazyload alt="Vue触发Diff的流程"></p>
 <h2 id="核心方法："><a href="#核心方法：" class="headerlink" title="核心方法："></a>核心方法：</h2><h3 id="1-patch方法"><a href="#1-patch方法" class="headerlink" title="1. patch方法"></a>1. patch方法</h3><figure class="highlight jsx"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">patch</span>(<span class="hljs-params">oldVnode, newVnode</span>) &#123;<br>  <span class="hljs-comment">// 比较是否为一个类型的节点</span><br>  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldVnode, newVnode)) &#123; **<span class="hljs-comment">// 重点**</span><br>    <span class="hljs-comment">// 是：继续进行深层比较</span><br>    <span class="hljs-title function_">patchVnode</span>(oldVnode, newVnode) **<span class="hljs-comment">// 重点**</span><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 否</span><br>    <span class="hljs-keyword">const</span> oldEl = oldVnode.<span class="hljs-property">el</span> <span class="hljs-comment">// 旧虚拟节点的真实DOM节点</span><br>    <span class="hljs-keyword">const</span> parentEle = api.<span class="hljs-title function_">parentNode</span>(oldEl) <span class="hljs-comment">// 获取父节点</span><br>    <span class="hljs-title function_">createEle</span>(newVnode) <span class="hljs-comment">// 创建新虚拟节点对应的真实DOM节点</span><br>    <span class="hljs-keyword">if</span> (parentEle !== <span class="hljs-literal">null</span>) &#123;<br>      api.<span class="hljs-title function_">insertBefore</span>(parentEle, vnode.<span class="hljs-property">el</span>, api.<span class="hljs-title function_">nextSibling</span>(oEl)) <span class="hljs-comment">// 将新元素添加进父元素</span><br>      api.<span class="hljs-title function_">removeChild</span>(parentEle, oldVnode.<span class="hljs-property">el</span>)  <span class="hljs-comment">// 移除以前的旧元素节点</span><br>      <span class="hljs-comment">// 设置null，释放内存</span><br>      oldVnode = <span class="hljs-literal">null</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> newVnode<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这个方法作用就是，对比当前同层的虚拟节点是否为同一种类型的标签<code>(同一类型的标准，下面会讲)</code>：</p>
@@ -301,7 +302,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>a<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>b<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><br>修改数据后<br><br><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>b<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>c<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>e<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>a<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>那么新旧两个子节点集合以及其首尾指针为：</p>
-<p><img src="/images/diff.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <p>然后会进行互相进行比较，总共有五种比较情况：</p>
 <ul>
 <li>1、<code>oldS 和 newS</code> 使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newS)</code></li>
@@ -310,34 +311,34 @@
 <li>4、<code>oldE 和 newE</code> 使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newE)</code></li>
 <li>5、如果以上逻辑都匹配不到，再把所有旧子节点的 <code>key</code> 做一个映射到旧节点下标的 <code>key -&gt; index</code> 表，然后用新 <code>vnode</code> 的 <code>key</code> 去找出在旧节点中可以复用的位置。</li>
 </ul>
-<p><img src="/images/diff1.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
-<h2 id="分析过程："><a href="#分析过程：" class="headerlink" title="分析过程："></a>分析过程：</h2><p><img src="/images/diff2.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff1.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="分析过程："><a href="#分析过程：" class="headerlink" title="分析过程："></a>分析过程：</h2><p><img src="/images/diff/diff2.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li>第一步</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html">oldS = a, oldE = c<br>newS = b, newE = a<br></code></pre></td></tr></table></figure>
 
 <p>比较结果：<code>oldS 和 newE</code>相等，需要把<code>节点a</code>移动到<code>newE</code>所对应的位置，也就是末尾，同时<code>oldS++</code>，<code>newE--</code></p>
-<p><img src="/images/diff3.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff3.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li>第二步</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html">oldS = b, oldE = c<br>newS = b, newE = e<br></code></pre></td></tr></table></figure>
 
 <p>比较结果：<code>oldS 和 newS</code>相等，需要把<code>节点b</code>移动到<code>newS</code>所对应的位置，同时<code>oldS++</code>,<code>newS++</code></p>
-<p><img src="/images/diff4.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff4.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li>第三步</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html">oldS = c, oldE = c<br>newS = c, newE = e<br></code></pre></td></tr></table></figure>
 
 <p>比较结果：<code>oldS、oldE 和 newS</code>相等，需要把<code>节点c</code>移动到<code>newS</code>所对应的位置，同时<code>oldS++</code>,<code>newS++</code></p>
-<p><img src="/images/diff5.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff5.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li>第四步</li>
 </ul>
 <p><code>oldS &gt; oldE</code>，则<code>oldCh</code>先遍历完成了，而<code>newCh</code>还没遍历完，说明<code>newCh比oldCh多</code>，所以需要将多出来的节点，插入到真实DOM上对应的位置上</p>
-<p><img src="/images/diff6.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/images/diff/diff6.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 </blockquote>
 <p><code>updateChildren</code>的核心原理代码</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">updateChildren</span>(<span class="hljs-params">parentElm, oldCh, newCh</span>) &#123;<br>  <span class="hljs-keyword">let</span> oldStartIdx = <span class="hljs-number">0</span>, newStartIdx = <span class="hljs-number">0</span> <span class="hljs-comment">//旧节点数组与新节点数组的下标</span><br>  <span class="hljs-keyword">let</span> oldEndIdx = oldCh.<span class="hljs-property">length</span> - <span class="hljs-number">1</span><br>  <span class="hljs-keyword">let</span> oldStartVnode = oldCh[<span class="hljs-number">0</span>] <span class="hljs-comment">//旧节点数组第一个子节点</span><br>  <span class="hljs-keyword">let</span> oldEndVnode = oldCh[oldEndIdx]<br>  <span class="hljs-keyword">let</span> newEndIdx = newCh.<span class="hljs-property">length</span> - <span class="hljs-number">1</span><br>  <span class="hljs-keyword">let</span> newStartVnode = newCh[<span class="hljs-number">0</span>]<br>  <span class="hljs-keyword">let</span> newEndVnode = newCh[newEndIdx] <span class="hljs-comment">// 准备工作</span><br>  <span class="hljs-keyword">let</span> oldKeyToIdx<br>  <span class="hljs-keyword">let</span> idxInOld<br>  <span class="hljs-keyword">let</span> elmToMove<br>  <span class="hljs-keyword">let</span> before<br>  <span class="hljs-keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) &#123;<br>    <span class="hljs-keyword">if</span> (oldStartVnode == <span class="hljs-literal">null</span>) &#123;<br>      oldStartVnode = oldCh[++oldStartIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oldEndVnode == <span class="hljs-literal">null</span>) &#123;<br>      oldEndVnode = oldCh[--oldEndIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newStartVnode == <span class="hljs-literal">null</span>) &#123;<br>      newStartVnode = newCh[++newStartIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newEndVnode == <span class="hljs-literal">null</span>) &#123;<br>      newEndVnode = newCh[--newEndIdx] <span class="hljs-comment">//先判断节点是否为null</span><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldStartVnode, newStartVnode)) &#123;<br>      <span class="hljs-title function_">patchVnode</span>(oldStartVnode, newStartVnode)<br>      oldStartVnode = oldCh[++oldStartIdx]<br>      newStartVnode = newCh[++newStartIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldEndVnode, newEndVnode)) &#123;<br>      <span class="hljs-title function_">patchVnode</span>(oldEndVnode, newEndVnode)<br>      oldEndVnode = oldCh[--oldEndIdx]<br>      newEndVnode = newCh[--newEndIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldStartVnode, newEndVnode)) &#123;<br>      <span class="hljs-title function_">patchVnode</span>(oldStartVnode, newEndVnode)<br>      api.<span class="hljs-title function_">insertBefore</span>(parentElm, oldStartVnode.<span class="hljs-property">el</span>, api.<span class="hljs-title function_">nextSibling</span>(oldEndVnode.<span class="hljs-property">el</span>))<br>      oldStartVnode = oldCh[++oldStartIdx]<br>      newEndVnode = newCh[--newEndIdx]<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldEndVnode, newStartVnode)) &#123;<br>      <span class="hljs-title function_">patchVnode</span>(oldEndVnode, newStartVnode)<br>      api.<span class="hljs-title function_">insertBefore</span>(parentElm, oldEndVnode.<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>)<br>      oldEndVnode = oldCh[--oldEndIdx]<br>      newStartVnode = newCh[++newStartIdx]<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 使用key时的比较</span><br>      <span class="hljs-keyword">if</span> (oldKeyToIdx === <span class="hljs-literal">undefined</span>) &#123;<br>        oldKeyToIdx = <span class="hljs-title function_">createKeyToOldIdx</span>(oldCh, oldStartIdx, oldEndIdx) <span class="hljs-comment">// 有key生成index表</span><br>      &#125;<br>      idxInOld = oldKeyToIdx[newStartVnode.<span class="hljs-property">key</span>]<br>      <span class="hljs-keyword">if</span> (!idxInOld) &#123;<br>        api.<span class="hljs-title function_">insertBefore</span>(parentElm, <span class="hljs-title function_">createEle</span>(newStartVnode).<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>)<br>        newStartVnode = newCh[++newStartIdx]<br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        elmToMove = oldCh[idxInOld]<br>        <span class="hljs-keyword">if</span> (elmToMove.<span class="hljs-property">sel</span> !== newStartVnode.<span class="hljs-property">sel</span>) &#123;<br>          api.<span class="hljs-title function_">insertBefore</span>(parentElm, <span class="hljs-title function_">createEle</span>(newStartVnode).<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-title function_">patchVnode</span>(elmToMove, newStartVnode)<br>          oldCh[idxInOld] = <span class="hljs-literal">null</span><br>          api.<span class="hljs-title function_">insertBefore</span>(parentElm, elmToMove.<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>)<br>        &#125;<br>        newStartVnode = newCh[++newStartIdx]<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (oldStartIdx &gt; oldEndIdx) &#123;<br>    before = newCh[newEndIdx + <span class="hljs-number">1</span>] == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : newCh[newEndIdx + <span class="hljs-number">1</span>].<span class="hljs-property">el</span><br>    <span class="hljs-title function_">addVnodes</span>(parentElm, before, newCh, newStartIdx, newEndIdx)<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newStartIdx &gt; newEndIdx) &#123;<br>    <span class="hljs-title function_">removeVnodes</span>(parentElm, oldCh, oldStartIdx, oldEndIdx)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -349,6 +350,13 @@
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
                 
               </div>
               
@@ -363,12 +371,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/05/18/JavaScript/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E6%96%B9%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数组去重的方法</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/30/demo1-demo2-1/">
-                        <span class="hidden-mobile">demo1/demo2</span>
+                      <a href="/2022/03/30/about/index/">
+                        <span class="hidden-mobile">About</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
