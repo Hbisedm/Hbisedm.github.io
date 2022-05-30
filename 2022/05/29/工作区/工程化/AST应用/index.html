@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="-– title: AST date: 2022-05-25 18:16:56 tags: 工程化 excerpt: AST的概念与使用 -– #工程化 AST什么是ASTAST 是 Abstract Syntax Tree 的简称，是前端工程化绕不过的一个名词。它涉及到工程化诸多环节的应用，比如:  如何将 Typescript 转化为 Javascript (typescript) 如何将 S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hbisedm">
+<meta property="og:url" content="http://example.com/2022/05/29/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E5%B7%A5%E7%A8%8B%E5%8C%96/AST%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="-– title: AST date: 2022-05-25 18:16:56 tags: 工程化 excerpt: AST的概念与使用 -– #工程化 AST什么是ASTAST 是 Abstract Syntax Tree 的简称，是前端工程化绕不过的一个名词。它涉及到工程化诸多环节的应用，比如:  如何将 Typescript 转化为 Javascript (typescript) 如何将 S">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292105187.webp">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292116023.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292116906.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292122553.webp">
+<meta property="article:published_time" content="2022-05-29T13:04:06.523Z">
+<meta property="article:modified_time" content="2022-05-30T12:57:00.923Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292105187.webp">
+  
+  
+  <title>Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-29 21:04" pubdate>
+        May 29, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>-–</p>
+<p>title: AST</p>
+<p>date: 2022-05-25 18:16:56</p>
+<p>tags: 工程化</p>
+<p>excerpt: AST的概念与使用</p>
+<p>-–</p>
+<p>#工程化</p>
+<h1 id="AST"><a href="#AST" class="headerlink" title="AST"></a>AST</h1><h2 id="什么是AST"><a href="#什么是AST" class="headerlink" title="什么是AST"></a>什么是AST</h2><p><code>AST</code> 是 <code>Abstract Syntax Tree</code> 的简称，是前端工程化绕不过的一个名词。它涉及到工程化诸多环节的应用，比如:</p>
+<ol>
+<li>如何将 Typescript 转化为 Javascript (typescript)</li>
+<li>如何将 SASS&#x2F;LESS 转化为 CSS (sass&#x2F;less)</li>
+<li>如何将 ES6+ 转化为 ES5 (babel)</li>
+<li>如何将 Javascript 代码进行格式化 (eslint&#x2F;prettier)</li>
+<li>如何识别 React 项目中的 JSX (babel)</li>
+<li>GraphQL、MDX、Vue SFC 等等</li>
+</ol>
+<p>而在语言转换的过程中，实质上就是对其 AST 的操作，核心步骤就是 AST 三步走</p>
+<ol>
+<li>Code -&gt; AST (Parse) </li>
+<li>AST -&gt; AST (Transform)</li>
+<li>AST -&gt; Code (Generate)</li>
+</ol>
+<blockquote>
+<p>TS转换JS的过程：TS的Code 转成 TS的AST；TS的AST转成JS的AST；JS的AST转成JS的Code</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292105187.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>以下是一段代码，及其对应的 AST（抽象的语法树）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Code</span><br><span class="hljs-keyword">const</span> a = <span class="hljs-number">4</span><br><br><span class="hljs-comment">// AST</span><br>&#123;<br>  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Program&quot;</span>,<br>  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">11</span>,<br>  <span class="hljs-string">&quot;body&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;VariableDeclaration&quot;</span>,<br>      <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>      <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">11</span>,<br>      <span class="hljs-string">&quot;declarations&quot;</span>: [<br>        &#123;<br>          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;VariableDeclarator&quot;</span>,<br>          <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">6</span>,<br>          <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">11</span>,<br>          <span class="hljs-string">&quot;id&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,<br>            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">6</span>,<br>            <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">7</span>,<br>            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;a&quot;</span><br>          &#125;,<br>          <span class="hljs-string">&quot;init&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Literal&quot;</span>,<br>            <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">10</span>,<br>            <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">11</span>,<br>            <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">4</span>,<br>            <span class="hljs-string">&quot;raw&quot;</span>: <span class="hljs-string">&quot;4&quot;</span><br>          &#125;<br>        &#125;<br>      ],<br>      <span class="hljs-string">&quot;kind&quot;</span>: <span class="hljs-string">&quot;const&quot;</span><br>    &#125;<br>  ],<br>  <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;module&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>不同的语言拥有不同的解析器，比如 Javascript 的解析器和 CSS 的解析器就完全不同。（一般JS的解析器是babel，CSS的解析器是postCss）</p>
+<p>对相同的语言，也存在诸多的解析器，也就会生成多种 AST，如 <code>babel</code> 与 <code>espree</code>。</p>
+<p>在 <a target="_blank" rel="noopener" href="https://astexplorer.net/">AST Explorer (opens new window)</a>中，列举了诸多语言的解析器(Parser)，及转化器(Transformer)。</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292116023.png" srcset="/img/loading.gif" lazyload alt="image-20220529211605976"></p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292116906.png" srcset="/img/loading.gif" lazyload alt="image-20220529211636863"></p>
+<p>使用不同的解析器，就会解析出不同的AST</p>
+<h3 id="词法分析-Lexical-Analysis"><a href="#词法分析-Lexical-Analysis" class="headerlink" title="词法分析 (Lexical Analysis)"></a>词法分析 (Lexical Analysis)</h3><p>词法分析用以将代码转化为 <code>Token</code> 流，维护一个关于 Token 的数组</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292122553.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Code</span><br>a = <span class="hljs-number">3</span><br><br><span class="hljs-comment">// Token</span><br>[<br>  &#123; <span class="hljs-attr">type</span>: &#123; ... &#125;, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-attr">start</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">end</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">loc</span>: &#123; ... &#125; &#125;,<br>  &#123; <span class="hljs-attr">type</span>: &#123; ... &#125;, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;=&quot;</span>, <span class="hljs-attr">start</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">end</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">loc</span>: &#123; ... &#125; &#125;,<br>  &#123; <span class="hljs-attr">type</span>: &#123; ... &#125;, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-attr">start</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">end</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">loc</span>: &#123; ... &#125; &#125;,<br>  ...<br>]<br></code></pre></td></tr></table></figure>
+
+<p>词法分析后的 Token 流也有诸多应用，如:</p>
+<ol>
+<li>代码检查，如 eslint 判断是否以分号结尾，判断是否含有分号的 token</li>
+<li>语法高亮，如 highlight&#x2F;prism 使之代码高亮</li>
+<li>模板语法，如 ejs 等模板也离不开</li>
+</ol>
+<h3 id="语法分析-Syntactic-Analysis"><a href="#语法分析-Syntactic-Analysis" class="headerlink" title="语法分析 (Syntactic Analysis)"></a>语法分析 (Syntactic Analysis)</h3><p>语法分析将 Token 流转化为结构化的 AST，方便操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Program&quot;</span>,<br>  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">5</span>,<br>  <span class="hljs-string">&quot;body&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ExpressionStatement&quot;</span>,<br>      <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>      <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">5</span>,<br>      <span class="hljs-string">&quot;expression&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;AssignmentExpression&quot;</span>,<br>        <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>        <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">5</span>,<br>        <span class="hljs-string">&quot;operator&quot;</span>: <span class="hljs-string">&quot;=&quot;</span>,<br>        <span class="hljs-string">&quot;left&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Identifier&quot;</span>,<br>          <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">0</span>,<br>          <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">1</span>,<br>          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;a&quot;</span><br>        &#125;,<br>        <span class="hljs-string">&quot;right&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Literal&quot;</span>,<br>          <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-number">4</span>,<br>          <span class="hljs-string">&quot;end&quot;</span>: <span class="hljs-number">5</span>,<br>          <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">3</span>,<br>          <span class="hljs-string">&quot;raw&quot;</span>: <span class="hljs-string">&quot;3&quot;</span><br>        &#125;<br>      &#125;<br>    &#125;<br>  ],<br>  <span class="hljs-string">&quot;sourceType&quot;</span>: <span class="hljs-string">&quot;module&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="AST的应用"><a href="#AST的应用" class="headerlink" title="AST的应用"></a>AST的应用</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903958574530568">html的AST解析器</a></p>
+<p>可参考一个最简编译器的实现 <a target="_blank" rel="noopener" href="https://github.com/jamiebuilds/the-super-tiny-compiler">the super tiny compiler</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://q.shanyue.tech/engineering/756.html#ast-%E7%9A%84%E7%94%9F%E6%88%90">AST是啥和它的应用</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/29/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E5%B7%A5%E7%A8%8B%E5%8C%96/ESM%E4%B8%8ECJS/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

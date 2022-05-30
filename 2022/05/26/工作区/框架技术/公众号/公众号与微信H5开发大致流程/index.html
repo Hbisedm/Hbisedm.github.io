@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="公众号、H5的开发流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="公众号、H5的开发">
+<meta property="og:url" content="http://example.com/2022/05/26/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/%E5%85%AC%E4%BC%97%E5%8F%B7/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%B8%8E%E5%BE%AE%E4%BF%A1H5%E5%BC%80%E5%8F%91%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="公众号、H5的开发流程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200928316.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200929969.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200929871.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200930000.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200930596.png">
+<meta property="article:published_time" content="2022-05-26T04:42:26.000Z">
+<meta property="article:modified_time" content="2022-05-30T13:18:45.962Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="公众号">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200928316.png">
+  
+  
+  <title>公众号、H5的开发 - Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="公众号、H5的开发">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-26 12:42" pubdate>
+        May 26, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">公众号、H5的开发</h1>
+            
+            <div class="markdown-body">
+              <p>#公众号 #微信H5开发</p>
+<h1 id="流程（SpringBoot、Vue3）"><a href="#流程（SpringBoot、Vue3）" class="headerlink" title="流程（SpringBoot、Vue3）"></a>流程（SpringBoot、Vue3）</h1><p>面向过程写法</p>
+<h2 id="准备工具与环境："><a href="#准备工具与环境：" class="headerlink" title="准备工具与环境："></a>准备工具与环境：</h2><ul>
+<li>JDK1.8</li>
+<li>Node16</li>
+<li>IDEA</li>
+<li>WebStorm(VS Code也可)</li>
+<li>Docker(容器：Nginx)</li>
+<li>ngrok(内网穿透）</li>
+</ul>
+<h2 id="方式："><a href="#方式：" class="headerlink" title="方式："></a>方式：</h2><ol>
+<li><p>使用官方的包进行开发后端（需要自己一个个搭建，比较麻烦点）</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Wechat-Group/WxJava"></a><a target="_blank" rel="noopener" href="https://github.com/Wechat-Group/WxJava">https://github.com/Wechat-Group/WxJava</a></p>
+</li>
+<li><p>使用别人写好的springboot模板快速开发后端</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/binarywang/weixin-java-mp-demo"></a><a target="_blank" rel="noopener" href="https://github.com/binarywang/weixin-java-mp-demo">https://github.com/binarywang/weixin-java-mp-demo</a></p>
+</li>
+</ol>
+<p><em>我使用了第二种方式<em/></p>
+<h2 id="配置服务"><a href="#配置服务" class="headerlink" title="配置服务"></a>配置服务</h2><p><code>申请公众号(个人订阅号)→申请测试号→配置服务器地址信息等</code></p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200928316.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>测试号信息官方给我们的</p>
+</li>
+<li><p>接口配置信息的<strong>配置流程</strong></p>
+<p>先将Springboot配置好测试号的信息</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200929969.png" srcset="/img/loading.gif" lazyload></p>
+<p>其中com.github.binarywang.demo.wx.mp.controller.WxPortalController#authGet，微信那边实际请求到我们这个地址(get请求做身份验证，post请求做交互作用)</p>
+<p>配置<code>http://域名/api/wx/portal/&#123;appid&#125; 和 Token</code> 即可</p>
+</li>
+<li><p>域名如何生成</p>
+<p>ngork内网穿透而来，映射的是docker里面到nginx容器，docker如何跑Nginx，google一下就行</p>
+<p>主要配置个挂载Mounts，使得每次本地前端项目打包后就可以在手机上直接看到最新的页面情况</p>
+</li>
+</ol>
+<p> <img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200929871.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># user  nobody;</span><br><span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">4</span>;<br><span class="hljs-section">events</span> &#123;<br>    <span class="hljs-attribute">worker_connections</span>  <span class="hljs-number">1024</span>;<br>&#125;<br><span class="hljs-section">http</span> &#123;<br>    <span class="hljs-attribute">include</span>       mime.types;<br>    <span class="hljs-attribute">default_type</span>  application/octet-stream;<br>    <span class="hljs-attribute">sendfile</span>        <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">keepalive_timeout</span>  <span class="hljs-number">65</span>;<br>    <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;  <span class="hljs-comment"># 开启目录文件列表</span><br>    <span class="hljs-attribute">autoindex_exact_size</span> <span class="hljs-literal">on</span>;  <span class="hljs-comment"># 显示出文件的确切大小，单位是bytes</span><br>    <span class="hljs-attribute">autoindex_localtime</span> <span class="hljs-literal">on</span>;  <span class="hljs-comment"># 显示的文件时间为文件的服务器时间</span><br>    <span class="hljs-attribute">charset</span> utf-<span class="hljs-number">8</span>,gbk,gb2312;  <span class="hljs-comment"># 避免中文乱码</span><br>    <span class="hljs-attribute">gzip</span>  <span class="hljs-literal">on</span>;<br>    <span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>        <span class="hljs-attribute">server_name</span>  localhost;<br>        <span class="hljs-section">location</span> / &#123;<br>            <span class="hljs-attribute">root</span> /usr/share/nginx/html;<br>            <span class="hljs-attribute">index</span> index.html;<br>            <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;  <br>        &#125;<br>        <span class="hljs-section">location</span> /assets/&#123;<br>            <span class="hljs-attribute">alias</span>  /usr/share/nginx/html/assets/;<br>        &#125;<br>        <span class="hljs-section">location</span><span class="hljs-regexp"> ^~</span> /api/&#123;<br>            <span class="hljs-attribute">proxy_pass</span> &lt;http://192.168.1.8:9088/&gt;; <span class="hljs-comment">#SpringBoot服务</span><br>        &#125;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到里面配置了个方向代理，代理到我们本地到SpringBoot服务，所以接口配置的URL实际访问<code>http://域名/api/wx/portal/&#123;appid&#125; =&gt; http:192.168.1.8:9088/wx/portal/&#123;appid&#125;</code></p>
+<ol start="4">
+<li>JS安全域名配置ngork提供给我们的域名就行</li>
+</ol>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="获取access-token-公众号开发需要）"><a href="#获取access-token-公众号开发需要）" class="headerlink" title="获取access_token(公众号开发需要）"></a>获取access_token(公众号开发需要）</h3><p>个人服务器通过https请求方式: GET <a target="_blank" rel="noopener" href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET"></a><a target="_blank" rel="noopener" href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET">https://api.weixin.qq.com/cgi-bin/token?grant_type&#x3D;client_credential&amp;appid&#x3D;APPID&amp;secret&#x3D;APPSECRET</a>填写对应参数即可获取到access_token</p>
+<p>weixin-java-mp-demo框架帮我们处理好了，还帮我们做了自动刷新处理，只要我们在application.yaml文件中配置没问题，其他都不用管</p>
+<h3 id="1-公众号如何回复"><a href="#1-公众号如何回复" class="headerlink" title="1. 公众号如何回复"></a>1. 公众号如何回复</h3><p>我们使用了weixin-java-mp-demo进行开发后端，所以我们跟测试号的所有交互都会到这个方法中com.github.binarywang.demo.wx.mp.controller.WxPortalController#post</p>
+<p>所以我们只要在对应到handler中处理不同事情就行</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200930000.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-自定义菜单"><a href="#2-自定义菜单" class="headerlink" title="2. 自定义菜单"></a>2. 自定义菜单</h3><p><strong>com&#x2F;github&#x2F;binarywang&#x2F;demo&#x2F;wx&#x2F;mp&#x2F;controller&#x2F;WxMenuController.java</strong>中定义了很多开发者对菜单的操作</p>
+<h3 id="3-H5授权"><a href="#3-H5授权" class="headerlink" title="3. H5授权"></a>3. H5授权</h3><p>H5页面首先拿到code，将code发到个人服务器，个人服务器去微信服务器请求后返回open_id给H5页面，用户的access_token不要给到前端，</p>
+<p>2种模式，snsapi_base与snsapi_userinfo</p>
+<p>snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且， 即使在未关注的情况下，只要用户授权，也能获取其信息 ）</p>
+<h3 id="4-H5调用weixin-sdk"><a href="#4-H5调用weixin-sdk" class="headerlink" title="4. H5调用weixin-sdk"></a>4. H5调用weixin-sdk</h3><ol>
+<li><p>绑定域名</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205200930596.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>加入微信sdk.js</p>
+</li>
+<li><p>通过config接口注入权限验证配置 config接口的参数来自用户对我们个人服务器发送请求返回对应对config参数给前端、</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript">wx.<span class="hljs-title function_">config</span>(&#123;<br>  <span class="hljs-attr">debug</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span><br>  <span class="hljs-attr">appId</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-comment">// 必填，公众号的唯一标识</span><br>  <span class="hljs-attr">timestamp</span>: , <span class="hljs-comment">// 必填，生成签名的时间戳</span><br>  <span class="hljs-attr">nonceStr</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-comment">// 必填，生成签名的随机串</span><br>  <span class="hljs-attr">signature</span>: <span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-comment">// 必填，签名</span><br>  <span class="hljs-attr">jsApiList</span>: [] <span class="hljs-comment">// 必填，需要使用的JS接口列表</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>什么是config参数？发送什么请求？</p>
+<p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#62"></a><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#62">https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps&#x2F;JS-SDK.html#62</a></p>
+</li>
+<li><p>使用ready接口处理成功验证</p>
+</li>
+<li><p>使用error接口处理失败验证</p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/26/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/v-model/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">v-model的使用</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/26/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/HTTP%E7%9A%84%E6%8F%A1%E6%89%8B/">
+                        <span class="hidden-mobile">HTTP的握手</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

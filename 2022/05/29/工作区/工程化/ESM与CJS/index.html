@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="-– title: ESM与CJS date: 2022-05-25 18:16:56 tags: 工程化 excerpt: 模块化规范. -– #工程化 commonJSnode的规范 exports导出强调：exports是一个对象，我们可以在这个对象中添加很多个属性，添加的属性会导出bar.js 123exports.name &#x3D; name;exports.age &#x3D; age;exports">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hbisedm">
+<meta property="og:url" content="http://example.com/2022/05/29/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E5%B7%A5%E7%A8%8B%E5%8C%96/ESM%E4%B8%8ECJS/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="-– title: ESM与CJS date: 2022-05-25 18:16:56 tags: 工程化 excerpt: 模块化规范. -– #工程化 commonJSnode的规范 exports导出强调：exports是一个对象，我们可以在这个对象中添加很多个属性，添加的属性会导出bar.js 123exports.name &#x3D; name;exports.age &#x3D; age;exports">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292127882.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292128757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205291346848.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205291346856.png">
+<meta property="article:published_time" content="2022-05-29T05:46:24.719Z">
+<meta property="article:modified_time" content="2022-05-30T12:56:41.474Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292127882.png">
+  
+  
+  <title>Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-29 13:46" pubdate>
+        May 29, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>-–</p>
+<p>title: ESM与CJS</p>
+<p>date: 2022-05-25 18:16:56</p>
+<p>tags: 工程化</p>
+<p>excerpt: 模块化规范.</p>
+<p>-–</p>
+<p>#工程化</p>
+<h1 id="commonJS"><a href="#commonJS" class="headerlink" title="commonJS"></a>commonJS</h1><p>node的规范</p>
+<h2 id="exports导出"><a href="#exports导出" class="headerlink" title="exports导出"></a>exports导出</h2><p><strong>强调：exports是一个对象，我们可以在这个对象中添加很多个属性，添加的属性会导出</strong><br>bar.js</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">exports.name</span> = name<span class="hljs-comment">;</span><br><span class="hljs-attr">exports.age</span> = age<span class="hljs-comment">;</span><br><span class="hljs-attr">exports.sayHello</span> = sayHello<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>main.js</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">const bar</span> = require(<span class="hljs-string">&#x27;./bar&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>上面这行代码意味着main中的bar变量等于exports对象；</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">main中的bar <span class="hljs-operator">=</span> bar中的exports<br></code></pre></td></tr></table></figure>
+
+<p>所以，我们可以使用使用bar这个对象</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">const</span> bar = require(<span class="hljs-string">&#x27;./bar&#x27;</span>);<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">name</span> = bar.<span class="hljs-keyword">name</span>;<br><span class="hljs-keyword">const</span> age = bar.age;<br><span class="hljs-keyword">const</span> sayHello = bar.sayHello;<br><br>console.log(<span class="hljs-keyword">name</span>);<br>console.log(age);<br><br>sayHello(<span class="hljs-string">&#x27;kobe&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>为了进一步论证，bar和exports是同一个对象：</p>
+<ul>
+<li>所以，bar对象是exports对象的<strong>浅拷贝</strong>；</li>
+<li>浅拷贝的本质就是一种引用的赋值而已；</li>
+</ul>
+<h2 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h2><p>我们追根溯源，通过维基百科中对CommonJS规范的解析：</p>
+<ul>
+<li>CommonJS中是没有module.exports的概念的；</li>
+<li>但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是module；</li>
+<li>所以在Node中真正用于导出的其实根本不是exports，而是module.exports；</li>
+<li>因为module才是导出的真正实现者；</li>
+</ul>
+<p>但是，为什么exports也可以导出呢？</p>
+<ul>
+<li>这是因为module对象的exports属性是exports对象的一个引用；</li>
+<li>也就是说 module.exports &#x3D; exports &#x3D; main中的bar；</li>
+</ul>
+<p><strong>注意：真正导出的模块内容的核心其实是module.exports，只是为了实现CommonJS的规范，刚好module.exports对exports对象有一个引用而已；</strong></p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292127882.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>结论：和exports对象没有任何关系了，exports你随便玩自己的吧；</li>
+<li>module.exports我现在导出一个自己的对象，不带着你玩了；</li>
+<li>新的对象取代了exports对象的导出，那么就意味着require导入的对象是新的对象；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205292128757.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="require细节"><a href="#require细节" class="headerlink" title="require细节"></a>require细节</h2><p>我们现在已经知道，require是一个函数，可以帮助我们引入一个文件（模块）中导入的对象。</p>
+<p>那么，require的查找规则是怎么样的呢？ <a target="_blank" rel="noopener" href="https://nodejs.org/dist/latest-v14.x/docs/api/modules.html#modules_all_together">node官方文档require</a></p>
+<h2 id="模块加载顺序"><a href="#模块加载顺序" class="headerlink" title="模块加载顺序"></a>模块加载顺序</h2><p>这里我们研究一下模块的加载顺序问题。</p>
+<ul>
+<li>结论一：模块在被第一次引入时，模块中的js代码会被运行一次</li>
+<li>结论二：模块被多次引入时，会缓存，最终只加载（运行）一次</li>
+</ul>
+<blockquote>
+<p>为什么只会加载运行一次呢？</p>
+<ul>
+<li>这是因为每个模块对象module都有一个属性：loaded。</li>
+<li>为false表示还没有加载，为true表示已经加载；</li>
+</ul>
+</blockquote>
+<ul>
+<li>结论三：如果有循环引入，那么加载顺序是什么？</li>
+</ul>
+<blockquote>
+<p>如果出现下面模块的引用关系，那么加载顺序是什么呢？</p>
+<ul>
+<li>这个其实是一种数据结构：图结构；</li>
+<li>图结构在遍历的过程中，有深度优先搜索（DFS, depth first search）和广度优先搜索（BFS, breadth first search）；</li>
+<li>Node采用的是深度优先算法：main -&gt; aaa -&gt; ccc -&gt; ddd -&gt; eee -&gt;bbb</li>
+</ul>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205291346848.png" srcset="/img/loading.gif" lazyload alt="55f36dbec645630eb35a864be36c0ff6.png"></p>
+<h1 id="ES-Module"><a href="#ES-Module" class="headerlink" title="ES Module"></a>ES Module</h1><p>语言的规范</p>
+<h2 id="export有三种方式"><a href="#export有三种方式" class="headerlink" title="export有三种方式"></a>export有三种方式</h2><ol>
+<li>定义变量时，抛出</li>
+</ol>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">name</span> = <span class="hljs-string">&#x27;Sam&#x27;</span> <br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>使用{ }抛出定义的变量、函数</li>
+</ol>
+<ul>
+<li>注意：这里的 {}里面不是ES6的对象字面量的增强写法，{}也不是表示一个对象的；</li>
+<li>所以： export {name: name}，是错误的写法；</li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">const</span> <span class="hljs-keyword">name</span> = <span class="hljs-string">&#x27;Sam&#x27;</span> <br><span class="hljs-keyword">export</span> <span class="hljs-comment">&#123;</span><br><span class="hljs-comment">    name</span><br><span class="hljs-comment">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>抛出时，可以给个别名</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">const</span> name = <span class="hljs-string">&#x27;Sam&#x27;</span> <br><span class="hljs-keyword">export</span> &#123;<br>    name <span class="hljs-keyword">as</span> AModuleName<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="import的三种方式"><a href="#import的三种方式" class="headerlink" title="import的三种方式"></a>import的三种方式</h2><ol>
+<li>import { 标识符列表 } from ‘module’</li>
+</ol>
+<ul>
+<li>注意：这里的{}也不是一个对象，里面只是存放导入的标识符列表内容；</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> &#123;<span class="hljs-type">name</span>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user_module.js&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>导入时可以给别名</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> &#123;<span class="hljs-type">name</span> <span class="hljs-keyword">as</span> username&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user_module.js&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>将标识符里面所有的功能放到一个模块功能对象内</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> foo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user_module.js&#x27;</span><br>console.log(foo.name)<br></code></pre></td></tr></table></figure>
+
+<h2 id="export与import结合"><a href="#export与import结合" class="headerlink" title="export与import结合"></a>export与import结合</h2><p>如果从一个模块中导入的内容，我们希望再直接导出出去，这个时候可以直接使用export来导出。</p>
+<h4 id="bar-js-抛出一个函数"><a href="#bar-js-抛出一个函数" class="headerlink" title="bar.js 抛出一个函数"></a>bar.js 抛出一个函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> func = <span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) &#123;<br>    <span class="hljs-keyword">return</span> a + b<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="foo-js导入bar-js-并抛出去-做了个中转"><a href="#foo-js导入bar-js-并抛出去-做了个中转" class="headerlink" title="foo.js导入bar.js 并抛出去 做了个中转"></a>foo.js导入bar.js 并抛出去 做了个中转</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> &#123;func&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./bar.js&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="main-js直接从foo中导入："><a href="#main-js直接从foo中导入：" class="headerlink" title="main.js直接从foo中导入："></a>main.js直接从foo中导入：</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> &#123;<span class="hljs-function"><span class="hljs-keyword">func</span>&#125; <span class="hljs-title">from</span> &#x27;./<span class="hljs-title">module</span>/<span class="hljs-title">foo</span>.<span class="hljs-title">js</span>&#x27;</span><br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(1, 2)</span></span><br></code></pre></td></tr></table></figure>
+
+<h3 id="甚至在foo-js中导出时，我们可以变化它的名字"><a href="#甚至在foo-js中导出时，我们可以变化它的名字" class="headerlink" title="甚至在foo.js中导出时，我们可以变化它的名字"></a>甚至在foo.js中导出时，我们可以变化它的名字</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">export</span> &#123;func <span class="hljs-keyword">as</span> fooFunc&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./bar.js&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>为什么要这样做呢？<ul>
+<li>在开发和封装一个功能库时，通常我们希望将暴露的所有接口放到一个文件中；</li>
+<li>这样方便指定统一的接口规范，也方便阅读；</li>
+<li>这个时候，我们就可以使用export和import结合使用 ；</li>
+</ul>
+</li>
+</ul>
+<h2 id="default-重要‼️"><a href="#default-重要‼️" class="headerlink" title="default(重要‼️)"></a>default(重要‼️)</h2><p>前面我们学习的导出功能都是有名字的导出（named exports）：</p>
+<ul>
+<li>在导出export时指定了名字；</li>
+<li>在导入import时需要知道具体的名字； 还有一种导出叫做默认导出（default export）</li>
+<li>默认导出export时可以不需要指定名字；</li>
+<li>在导入时不需要使用 {}，并且可以自己来指定名字；</li>
+<li>它也方便我们和现有的CommonJS等规范相互操作；</li>
+</ul>
+<h4 id="导出："><a href="#导出：" class="headerlink" title="导出："></a>导出：</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs perl">export default function <span class="hljs-function"><span class="hljs-keyword">sub</span>(<span class="hljs-title">num1</span>, <span class="hljs-title">num2</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> num1 - num2;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">import <span class="hljs-keyword">a</span> <span class="hljs-built_in">from</span> <span class="hljs-string">&#x27;./module/foo.js&#x27;</span><br><span class="hljs-keyword">a</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：在一个模块中，只能有一个默认导出（default export）；</strong></p>
+<h3 id="import-方法的使用"><a href="#import-方法的使用" class="headerlink" title="import()方法的使用"></a>import()方法的使用</h3><p>对于动态加载模块的情况下</p>
+<blockquote>
+<p>错误使用 <img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202205291346856.png" srcset="/img/loading.gif" lazyload alt="e7567502036105c87d19f0590ceb7cdc.png"></p>
+</blockquote>
+<blockquote>
+<p>正确使用</p>
+</blockquote>
+<p>aaa.js</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">export <span class="hljs-keyword">function</span> <span class="hljs-title function_">aaa</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;aaa被打印&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>bbb.js</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">export <span class="hljs-keyword">function</span> <span class="hljs-title function_">bbb</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;bbb被执行&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>main.js</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-keyword">let</span> flag = <span class="hljs-literal">true</span>;<br><span class="hljs-keyword">if</span> (flag) &#123;<br>  <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./modules/aaa.js&#x27;</span>).<span class="hljs-keyword">then</span>(aaa =&gt; &#123;<br>    aaa.aaa();<br>  &#125;)<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./modules/bbb.js&#x27;</span>).<span class="hljs-keyword">then</span>(bbb =&gt; &#123;<br>    bbb.bbb();<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ol>
+<li>CJS加载文件的过程是在运行时加载的，并且是同步的。</li>
+<li>ESM加载文件的过程是编译（解析）时加载的，是异步的。</li>
+<li>CJS 中exports和module.exports同时使用，只会拿module.exports的东西，而ESM的export和export default同时使用都可以拿到</li>
+<li>CJS是node的规范；ESM是语言层面的规范</li>
+<li>ESM可在编译期进行Tree Shaking，减少js体积。</li>
+<li>cjs 模块输出的是一个值的拷贝，esm 输出的是值的引用</li>
+<li>cjs 模块是运行时加载，esm 是编译时加载</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/29/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E5%B7%A5%E7%A8%8B%E5%8C%96/AST%E5%BA%94%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/26/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E7%AE%97%E6%B3%95/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+                        <span class="hidden-mobile">反转链表</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
