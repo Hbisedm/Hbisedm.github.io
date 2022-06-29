@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="#tag Webpack的DevServe、VueCLI、Vite的笔记123456&#x2F;&#x2F;webpack.config.js中配置devServe: &amp;#123;	contentBase: path.resolve(__dirname, &amp;#x27;public&amp;#x27;)	hot: true&amp;#125; 开启HMR VueCli 安装与使用123456&#x2F;&#x2F; 安装npm install @vue&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DevServe与VueCLI">
+<meta property="og:url" content="http://example.com/2022/06/07/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/Webpack%E7%9A%84DevServe%E3%80%81VueCLI%E3%80%81Vite/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="#tag Webpack的DevServe、VueCLI、Vite的笔记123456&#x2F;&#x2F;webpack.config.js中配置devServe: &amp;#123;	contentBase: path.resolve(__dirname, &amp;#x27;public&amp;#x27;)	hot: true&amp;#125; 开启HMR VueCli 安装与使用123456&#x2F;&#x2F; 安装npm install @vue&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206072106293.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206072124427.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081430510.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081433238.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081442540.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081520532.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081442540.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081701766.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081702800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081724884.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206082201008.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206082215784.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091059703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091131239.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091131468.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091137069.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091339982.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091339780.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091432515.png">
+<meta property="article:published_time" content="2022-06-07T09:15:48.000Z">
+<meta property="article:modified_time" content="2022-06-15T06:30:50.899Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="dev">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206072106293.png">
+  
+  
+  <title>DevServe与VueCLI - Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DevServe与VueCLI">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-07 17:15" pubdate>
+        June 7, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      73 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DevServe与VueCLI</h1>
+            
+            <div class="markdown-body">
+              <p>#tag</p>
+<h1 id="Webpack的DevServe、VueCLI、Vite的笔记"><a href="#Webpack的DevServe、VueCLI、Vite的笔记" class="headerlink" title="Webpack的DevServe、VueCLI、Vite的笔记"></a>Webpack的DevServe、VueCLI、Vite的笔记</h1><figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//webpack.config.js中配置</span><br><span class="hljs-attr">devServe</span>: &#123;<br>	<span class="hljs-attr">contentBase</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;public&#x27;</span>)<br>	<span class="hljs-attr">hot</span>: <span class="hljs-literal">true</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="开启HMR"><a href="#开启HMR" class="headerlink" title="开启HMR"></a>开启HMR</h2><p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206072106293.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="VueCli"><a href="#VueCli" class="headerlink" title="VueCli"></a>VueCli</h2><p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206072124427.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 安装<br>npm install @vue/cli -g<br>// 更新<br>npm update @vue/cli -g<br>// 使用<br>vue create `项目名称`<br></code></pre></td></tr></table></figure>
+<p>进入CLI命令行界面后，选择相关配置后自动创建个Vue项目给我们</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vue ui<br></code></pre></td></tr></table></figure>
+<p>也可以使用这个可视化WEB界面进行配置。</p>
+<h3 id="Vue-CLI-原理"><a href="#Vue-CLI-原理" class="headerlink" title="Vue CLI 原理"></a>Vue CLI 原理</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;serve&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vue-cli-service serve&quot;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vue-cli-service build&quot;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
+<p>发现以前用<code>webpack</code>命令变了，变成了<code>vue-cli-service</code>。<br>运行<code>npm run serve</code>其实回去<code>node_modules/bin</code>找对应的命令名。<br>不过里面的命令名只是个短链接，真正的链接在<code>@vue/cli-service/bin/vue-cli-service.js</code></p>
+<h4 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h4><p>里面代码短短几十行<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081430510.png" srcset="/img/loading.gif" lazyload><br>使用了一个Service的构造函数，构造出一个实例并使用它的run方法<br>接下来，看看<code>../lib/Service</code><br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081433238.png" srcset="/img/loading.gif" lazyload><br>这个<code>name</code>是我们运行时的一个参数，比如<code>vue-cli-service serve</code> name就为serve<br>这个<code>this.commands</code>对象在<code>../lib/Service</code>中没有赋值，那么它在哪里赋值的呢？？</p>
+<h4 id="PluginAPI"><a href="#PluginAPI" class="headerlink" title="PluginAPI"></a>PluginAPI</h4><p><code>this.commands</code>是在<code>../lib/PluginAPI.js</code>中实现赋值<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081442540.png" srcset="/img/loading.gif" lazyload><br>而Service的构造函数中有个<code>this.resolvePlugins(plugins, useBuiltIn)</code>方法</p>
+<h4 id="resolvePlugins："><a href="#resolvePlugins：" class="headerlink" title="resolvePlugins："></a>resolvePlugins：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs js">resolvePlugins (inlinePlugins, useBuiltIn) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-title function_">idToPlugin</span> = id =&gt; (&#123;<br>      <span class="hljs-attr">id</span>: id.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^.\//</span>, <span class="hljs-string">&#x27;built-in:&#x27;</span>),<br>      <span class="hljs-attr">apply</span>: <span class="hljs-built_in">require</span>(id)<br>    &#125;)<br><br>    <span class="hljs-keyword">let</span> plugins<br><br>    <span class="hljs-keyword">const</span> builtInPlugins = [<br>      <span class="hljs-string">&#x27;./commands/serve&#x27;</span>,<br>      <span class="hljs-string">&#x27;./commands/build&#x27;</span>,<br>      <span class="hljs-string">&#x27;./commands/inspect&#x27;</span>,<br>      <span class="hljs-string">&#x27;./commands/help&#x27;</span>,<br>      <span class="hljs-comment">// config plugins are order sensitive</span><br>      <span class="hljs-string">&#x27;./config/base&#x27;</span>,<br>      <span class="hljs-string">&#x27;./config/css&#x27;</span>,<br>      <span class="hljs-string">&#x27;./config/prod&#x27;</span>,<br>      <span class="hljs-string">&#x27;./config/app&#x27;</span><br>    ].<span class="hljs-title function_">map</span>(idToPlugin)<br><br>    <span class="hljs-keyword">if</span> (inlinePlugins) &#123;<br>      plugins = useBuiltIn !== <span class="hljs-literal">false</span><br>        ? builtInPlugins.<span class="hljs-title function_">concat</span>(inlinePlugins)<br>        : inlinePlugins<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">const</span> projectPlugins = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">devDependencies</span> || &#123;&#125;)<br>        .<span class="hljs-title function_">concat</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">dependencies</span> || &#123;&#125;))<br>        .<span class="hljs-title function_">filter</span>(isPlugin)<br>        .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">id</span> =&gt;</span> &#123;<br>          <span class="hljs-keyword">if</span> (<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">optionalDependencies</span> &amp;&amp;<br>            id <span class="hljs-keyword">in</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">optionalDependencies</span><br>          ) &#123;<br>            <span class="hljs-keyword">let</span> <span class="hljs-title function_">apply</span> = (<span class="hljs-params"></span>) =&gt; &#123;&#125;<br>            <span class="hljs-keyword">try</span> &#123;<br>              apply = <span class="hljs-built_in">require</span>(id)<br>            &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>              <span class="hljs-title function_">warn</span>(<span class="hljs-string">`Optional dependency <span class="hljs-subst">$&#123;id&#125;</span> is not installed.`</span>)<br>            &#125;<br><br>            <span class="hljs-keyword">return</span> &#123; id, apply &#125;<br>          &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_">idToPlugin</span>(id)<br>          &#125;<br>        &#125;)<br>      plugins = builtInPlugins.<span class="hljs-title function_">concat</span>(projectPlugins)<br>    &#125;<br><br>    <span class="hljs-comment">// Local plugins</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">vuePlugins</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">vuePlugins</span>.<span class="hljs-property">service</span>) &#123;<br>      <span class="hljs-keyword">const</span> files = <span class="hljs-variable language_">this</span>.<span class="hljs-property">pkg</span>.<span class="hljs-property">vuePlugins</span>.<span class="hljs-property">service</span><br>      <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(files)) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Invalid type for option &#x27;vuePlugins.service&#x27;, expected &#x27;array&#x27; but got <span class="hljs-subst">$&#123;<span class="hljs-keyword">typeof</span> files&#125;</span>.`</span>)<br>      &#125;<br>      plugins = plugins.<span class="hljs-title function_">concat</span>(files.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> (&#123;<br>        <span class="hljs-attr">id</span>: <span class="hljs-string">`local:<span class="hljs-subst">$&#123;file&#125;</span>`</span>,<br>        <span class="hljs-attr">apply</span>: <span class="hljs-title function_">loadModule</span>(<span class="hljs-string">`./<span class="hljs-subst">$&#123;file&#125;</span>`</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">pkgContext</span>)<br>      &#125;)))<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> plugins<br>  &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面代码中，定义了一个<code>idToPlugin</code>箭头函数，实现的效果就是遍历一个数组中的路径字符串，然后生成一个个含有<code>&#123;id: xxx, apply: require(id) &#125;</code>的对象</li>
+<li>其中apply对应的是路径里面的module.exports的代码</li>
+<li>后面又加载了一些其他的插件</li>
+<li>最后返回这个plugins数组，里面包含了builtInPlugins数组中的<code>插件对象</code>和另一些插件</li>
+</ul>
+<p>现在我们知道了这些插件对象在哪里生成的了，但在哪里引入的呢？ init</p>
+<h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>Service.run方法中有个初始化init方法，这个方法中主要做了四件事：加载环境变量、加载用户配置、应用插件以及应用 <code>webpack</code> 配置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js">init (mode = process.<span class="hljs-property">env</span>.<span class="hljs-property">VUE_CLI_MODE</span>) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">initialized</span>) &#123;<br>      <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">initialized</span> = <span class="hljs-literal">true</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">mode</span> = mode<br><br>    <span class="hljs-comment">// load mode .env</span><br>    <span class="hljs-keyword">if</span> (mode) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">loadEnv</span>(mode)<br>    &#125;<br>    <span class="hljs-comment">// load base .env</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">loadEnv</span>()<br><br>    <span class="hljs-comment">// load user config</span><br>    <span class="hljs-keyword">const</span> userOptions = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">loadUserOptions</span>()<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span> = <span class="hljs-title function_">defaultsDeep</span>(userOptions, <span class="hljs-title function_">defaults</span>())<br><br>    <span class="hljs-title function_">debug</span>(<span class="hljs-string">&#x27;vue:project-config&#x27;</span>)(<span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>)<br><br>    <span class="hljs-comment">// apply plugins.</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">plugins</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">&#123; id, apply &#125;</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">pluginsToSkip</span>.<span class="hljs-title function_">has</span>(id)) <span class="hljs-keyword">return</span><br>      <span class="hljs-title function_">apply</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PluginAPI</span>(id, <span class="hljs-variable language_">this</span>), <span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>)<br>    &#125;)<br><br>    <span class="hljs-comment">// apply webpack configs from project config file</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>.<span class="hljs-property">chainWebpack</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">webpackChainFns</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>.<span class="hljs-property">chainWebpack</span>)<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>.<span class="hljs-property">configureWebpack</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">webpackRawConfigFns</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">projectOptions</span>.<span class="hljs-property">configureWebpack</span>)<br>    &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<p>看到对plugins进行了遍历，我们可以将 <code>this.plugins</code> 的值理解成 <code>resolvePlugins()</code> 方法中 <code>builtInPlugins</code> 数组映射之后的数组（该数组中的每个元素都是一个对象，对象中有 <code>id</code> 和 <code>apply</code> 两个属性），所以这里在遍历时解构出了 <code>id</code> 和 <code>apply</code>，之后调用了 <code>apply()</code> 方法，而根据前面的分析，这个 <code>apply()</code> 方法其实是 <code>resolvePlugins()</code> 方法中箭头函数 <code>idToPlugin</code> 返回的<strong>对象中的 <code>apply</code> 属性对应的 <code>require(id)</code> 的结果。而 <code>require(id)</code> 中的 <code>id</code> 其实就是 <code>&#39;./commands/serve&#39;</code> 或者 <code>&#39;./commands/build&#39;</code> 等</strong></p>
+<p>假如这里的 <code>id</code> 是 <code>&#39;./commands/serve&#39;</code>，那么 <code>require(id)</code> 就是 <code>require(&#39;./commands/serve&#39;)</code>，即 <code>./commands/serve</code> 文件中导出的内容，即 <code>id</code> 是 <code>&#39;./commands/serve&#39;</code> 时 <code>apply()</code> 方法就是 <code>./commands/serve</code> 文件导出的内容。</p>
+<h4 id="commands-x2F-serve-js"><a href="#commands-x2F-serve-js" class="headerlink" title="commands&#x2F;serve.js"></a>commands&#x2F;serve.js</h4><p>导出一个箭头函数，有2个参数，<br>传入的第一个参数是 <code>new PluginAPI(id, this)</code>[[#PluginAPI]]，这里的 <code>this</code> 是当前的 <code>service</code> 对象。也就是说 <code>./commands/serve</code> 中导出的箭头函数的第一个参数拿到的是一个 <code>PluginAPI</code> 类的实例对象，之后调用了这个实例对象的 <code>registerCommand()</code> 方法。<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081520532.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081442540.png" srcset="/img/loading.gif" lazyload><br>可以看到PluginAPI中的registerCommand方法第三个参数就是commands&#x2F;serve.js中到出去的异步函数<code>serve</code></p>
+<p><code>this.service.commands</code> 对象（即 <code>Service.js</code> 中 <code>run()</code> 方法中的 <code>this.commands</code> 对象）进行了赋值，赋值内容中就有将 <code>fn</code> 函数赋值进去。因此，之后在 <code>Service.js</code> 中 <code>run()</code> 方法中才能从 <code>command</code> 对象中解构出 <code>fn</code> 函数。</p>
+<p>所以，当我们执行 <code>npm run serve</code> 命令时，传入的 <code>command</code> 的值就是 <code>serve</code>，后续执行的 <code>run()</code> 方法的最后执行的 <code>fn()</code> 方法其实就是 <code>lib/commands/serve.js</code> 文件中导出的箭头函数中调用 <code>api.registerCommand()</code> 方法时传入的第三个参数即 <code>serve()</code> 函数了。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>使用<code>vue-service-cli xxxx</code> 命令执行时，会去执行<code>@vue/cli-service/bin/vue-cli-service.js</code>的service实例的<code>run</code>方法。而这个实例对应的Service类中有很多方法，主要看run方法。<strong>里面有个init方法，先初始化整个环境</strong>。在执行对应<code>command.fn方法</code></p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7058460792059854856">Vue CLI 之 cli-service 源码解析（1）</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7059019444546175006">Vue CLI 之 cli-service 源码解析（2）</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7059384798459985928">Vue CLI 之 cli-service 源码解析（3）</a></p>
+<h2 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h2><p>下一代构建工具</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081701766.png" srcset="/img/loading.gif" lazyload><br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081702800.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>从零开始学，vite官网的教程使用的脚手架，不太好入学。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install vite -g 全局安装<br><br>npm install vite -D 本地安装<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206081724884.png" srcset="/img/loading.gif" lazyload><br>math.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">sum</span> = (<span class="hljs-params">a, b</span>) =&gt; a + b;<br></code></pre></td></tr></table></figure>
+<p>main.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; sum &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./math.js&quot;</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">sum</span>(<span class="hljs-number">20</span>, <span class="hljs-number">30</span>));<br></code></pre></td></tr></table></figure>
+<p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./src/main.js&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>写些简单的js，并使用ESM模块化去导入使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npx vite<br></code></pre></td></tr></table></figure>
+<p>运行vite，发现启动了3000服务</p>
+<blockquote>
+<p><strong>注意点：</strong><br>使用vite后，import导入模块时，不需要用<code>.js</code>后缀了，直接可以使用文件名，因为vite帮我们做了处理，导入第三方后，如lodash库，若没有使用构建工具去处理的话，我们可能需要导入lodash里面好多依赖的方法，但使用了vite后，只需要导入正在使用的js文件即可。</p>
+</blockquote>
+<h4 id="css支持"><a href="#css支持" class="headerlink" title="css支持"></a>css支持</h4><p>vite不像webpack，引入css需要配置<code>css-loader</code>, <code>style-loader</code>直接使用即可。</p>
+<h4 id="less"><a href="#less" class="headerlink" title="less"></a>less</h4><p>编写less文件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@fontSize:</span> <span class="hljs-number">18px</span>;<br><span class="hljs-variable">@fontColor:</span> red;<br><span class="hljs-selector-class">.title</span> &#123;<br>	<span class="hljs-attribute">font-size</span>: <span class="hljs-variable">@fontSize</span>;<br>	<span class="hljs-attribute">color</span>: <span class="hljs-variable">@fontColor</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>安装less依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install less -D<br></code></pre></td></tr></table></figure>
+<p>使用js插入一些dom元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./less-style.less&quot;</span>;<br><span class="hljs-keyword">const</span> p = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;p&quot;</span>);<br>p.<span class="hljs-property">className</span> = <span class="hljs-string">&quot;title&quot;</span>;<br>p.<span class="hljs-property">innerText</span> = <span class="hljs-string">&quot;pppp&quot;</span>;<br><span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(p);<br></code></pre></td></tr></table></figure>
+<h4 id="配置poStcss"><a href="#配置poStcss" class="headerlink" title="配置poStcss"></a>配置poStcss</h4><p>对浏览器的某些CSS属性做浏览器设配<br>安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i postcss -D<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206082201008.png" srcset="/img/loading.gif" lazyload><br>发现没有适配，原因是我们还没对postcss做配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i postcss-preset-env<br></code></pre></td></tr></table></figure>
+<p>创建postcss.config.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">module.exports = &#123;<br>	plugins: [require(<span class="hljs-string">&quot;postcss-preset-env&quot;</span>)],<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206082215784.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="ts"><a href="#ts" class="headerlink" title="ts"></a>ts</h4><p>创建个ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">num1: <span class="hljs-built_in">number</span>, num2: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">number</span> &#123;<br>	<span class="hljs-keyword">return</span> num1 + num2;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> xxx <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ts/demo.ts&#x27;</span><br><br><span class="hljs-title function_">xxx</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+<p>发现vite默认就支持ts</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091059703.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="connect服务器"><a href="#connect服务器" class="headerlink" title="connect服务器"></a>connect服务器</h4><p>查看浏览器的network发现，加载了ts与less的静态资源。嗯？浏览器是不会解析这种文件，点击ts、less查看文件，发现是esm的js代码。为啥呢？</p>
+<blockquote>
+<p>原来是vite的本地服务器connect帮我们做了转换，我们的静态资源到浏览器的时候，vite的connect服务器帮这些浏览器不识别的后缀文件做了esmodule的js的转换（浏览器可以加载这种js文件）。  所以浏览器加载后，可以使用这些js代码，并执行执行。</p>
+</blockquote>
+<h4 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h4><p>看看vite对vue的支持</p>
+<blockquote>
+<p>首先安装vue3的依赖</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install vue@next -D<br></code></pre></td></tr></table></figure>
+<p>创建个<code>.vue</code>单文件 .&#x2F;src&#x2F;vue&#x2F;App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h2&gt;&#123;&#123;msg&#125;&#125;&lt;/h2&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br>&lt;script&gt;<br>export default &#123;<br>    data() &#123;<br>        return &#123;<br>            msg: &#x27;hello Hbisedm&#x27;<br>        &#125;<br>    &#125;<br>&#125;<br>&lt;/script&gt;<br>&lt;style scoped&gt;<br>h2 &#123;<br>    color: red;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<p>main.js内使用vue的createApp并挂载到index.html内</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./vue/App.vue&quot;</span>;<br>  <br><span class="hljs-title function_">createApp</span>(<span class="hljs-title class_">App</span>).<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>在index.html新增个<code>id为app的div标签</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>运行vite<br>发现报错了。<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091131239.png" srcset="/img/loading.gif" lazyload><br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091131468.png" srcset="/img/loading.gif" lazyload><br>我们需要配置vite对vue的支持。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i @vitejs/plugin-vue -D<br></code></pre></td></tr></table></figure>
+<p>安装的这个依赖是vite的插件，那么就需要我们进行配置了。<br>创建根目录下<code>vite.config.js</code><br>运行vite<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091137069.png" srcset="/img/loading.gif" lazyload><br>因为我们的vite是全局的，不是本地的<br>本地安装个vite</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i vite -D<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091339982.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// vite.config.js</span><br><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-vue&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">plugins</span>: [<span class="hljs-title function_">vue</span>()]<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>因为当前我的<code>@vitejs/plugin-vue</code>和<code>vue</code>版本都挺高的，所以不用装<code>@vue/compiler-sfc</code><br>运行<code>npx vite</code>就可以看到渲染出来了。</p>
+<h5 id="全局自定义元素"><a href="#全局自定义元素" class="headerlink" title="全局自定义元素"></a>全局自定义元素</h5><p>TestCE.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>	&lt;div&gt;<br>		&lt;p&gt;123&lt;/p&gt;<br>	&lt;/div&gt;<br>&lt;/template&gt;<br>&lt;script&gt;<br>export default &#123;&#125;<br>&lt;/script&gt;<br>&lt;style&gt;<br>p &#123;font-size: 22px;&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<p>在main.js中定义全局自定义元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; defineCustomElement &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">TestCEVue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./vue/TestCE.vue&quot;</span>;<br><span class="hljs-keyword">const</span> testVue = <span class="hljs-title function_">defineCustomElement</span>(<span class="hljs-title class_">TestCEVue</span>);<br><span class="hljs-keyword">const</span> styles = [<span class="hljs-string">&quot;p &#123;font-size: 32px; color: red;&#125;&quot;</span>];<br><span class="hljs-keyword">const</span> testStyleVue = <span class="hljs-title function_">defineCustomElement</span>(&#123; ...<span class="hljs-title class_">TestCEVue</span>, styles &#125;);\<br>  <br>customElements.<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;test-vue&quot;</span>, testVue);<br>customElements.<span class="hljs-title function_">define</span>(<span class="hljs-string">&quot;test-style-vue&quot;</span>, testStyleVue);<br></code></pre></td></tr></table></figure>
+<p>不用写import语句引入组件，直接使用就行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>	&lt;div&gt;<br>		&lt;h2&gt;&#123;&#123;msg&#125;&#125;&lt;/h2&gt;<br>		&lt;test-vue&gt;&lt;/test-vue&gt;<br>		&lt;test-style-vue&gt;&lt;/test-style-vue&gt;<br>		&lt;p&gt;123&lt;/p&gt;<br>	&lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+<p>上面的<code>./vue/TestCE.vue</code>的style不需要写scope。这个style不会污染全局的style。<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091339780.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="预打包"><a href="#预打包" class="headerlink" title="预打包"></a>预打包</h4><p>vite预打包后的结果<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206091432515.png" srcset="/img/loading.gif" lazyload><br>将他删除后，重新运行vite，会重新再生成一个，类似缓存的意思。如果有的话，运行vite会更快点。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/dev/">dev</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/09/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%8A%80%E5%B7%A7%E6%93%8D%E4%BD%9C/Storage%E7%9A%84%E5%8A%A0%E8%A7%A3%E5%AF%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Storage的加解密</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/07/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/Webpack5%E9%85%8D%E7%BD%AEVue3-SFC/">
+                        <span class="hidden-mobile">Webpack5配置Vue3-SFC</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

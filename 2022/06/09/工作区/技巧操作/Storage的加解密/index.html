@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="#tag Storage的加解密的笔记Storage的加解密 使用crypto-js第三库进行加解密。 定义了很多类型属性，进行控制Storage实例。如下代码。 12345678910111213141516171819202122232425262728&#x2F;&#x2F; 区分存储类型 type  &#x2F;&#x2F; 自定义名称前缀 prefix  &#x2F;&#x2F; 支持设置过期时间 expire  &#x2F;&#x2F; 支持加密可选，开发环境下未">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Storage的加解密">
+<meta property="og:url" content="http://example.com/2022/06/09/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%8A%80%E5%B7%A7%E6%93%8D%E4%BD%9C/Storage%E7%9A%84%E5%8A%A0%E8%A7%A3%E5%AF%86/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="#tag Storage的加解密的笔记Storage的加解密 使用crypto-js第三库进行加解密。 定义了很多类型属性，进行控制Storage实例。如下代码。 12345678910111213141516171819202122232425262728&#x2F;&#x2F; 区分存储类型 type  &#x2F;&#x2F; 自定义名称前缀 prefix  &#x2F;&#x2F; 支持设置过期时间 expire  &#x2F;&#x2F; 支持加密可选，开发环境下未">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-09T01:27:22.000Z">
+<meta property="article:modified_time" content="2022-06-09T01:30:42.077Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="技巧操作">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Storage的加解密 - Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Storage的加解密">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-09 09:27" pubdate>
+        June 9, 2022 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Storage的加解密</h1>
+            
+            <div class="markdown-body">
+              <p>#tag</p>
+<h1 id="Storage的加解密的笔记"><a href="#Storage的加解密的笔记" class="headerlink" title="Storage的加解密的笔记"></a>Storage的加解密的笔记</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/e8MSFaDwqcCFoxFTMimwPw">Storage的加解密</a></p>
+<p>使用<code>crypto-js</code>第三库进行加解密。</p>
+<p>定义了很多类型属性，进行控制Storage实例。如下代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 区分存储类型 type  </span><br><span class="hljs-comment">// 自定义名称前缀 prefix  </span><br><span class="hljs-comment">// 支持设置过期时间 expire  </span><br><span class="hljs-comment">// 支持加密可选，开发环境下未方便调试可关闭加密  </span><br>  <br><span class="hljs-comment">// 支持数据加密 这里采用 crypto-js 加密 也可使用其他方式  </span><br>  <br><span class="hljs-comment">// 判断是否支持 Storage isSupportStorage  </span><br>  <br><span class="hljs-comment">// 设置 setStorage  </span><br>  <br><span class="hljs-comment">// 获取 getStorage  </span><br>  <br><span class="hljs-comment">// 是否存在 hasStorage  </span><br>  <br><span class="hljs-comment">// 获取所有key getStorageKeys  </span><br>  <br><span class="hljs-comment">// 根据索引获取key getStorageForIndex  </span><br>  <br><span class="hljs-comment">// 获取localStorage长度 getStorageLength  </span><br>  <br><span class="hljs-comment">// 获取全部 getAllStorage  </span><br>  <br><span class="hljs-comment">// 删除 removeStorage  </span><br>  <br><span class="hljs-comment">// 清空 clearStorage  </span><br><br><span class="hljs-comment">//定义参数 类型 window.localStorage,window.sessionStorage,</span><br></code></pre></td></tr></table></figure>
+
+<p>完整代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/***  </span><br><span class="hljs-comment"> * title: storage.js  </span><br><span class="hljs-comment"> * Author: Gaby  </span><br><span class="hljs-comment"> * Email: xxx@126.com  </span><br><span class="hljs-comment"> * Time: 2022/6/1 17:30  </span><br><span class="hljs-comment"> * last: 2022/6/2 17:30  </span><br><span class="hljs-comment"> * Desc: 对存储的简单封装  </span><br><span class="hljs-comment"> */</span>  <br>   <br><span class="hljs-keyword">import</span> <span class="hljs-title class_">CryptoJS</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;crypto-js&#x27;</span>;  <br>  <br><span class="hljs-comment">// 十六位十六进制数作为密钥  </span><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SECRET_KEY</span> = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Utf8</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-string">&quot;3333e6e143439161&quot;</span>);  <br><span class="hljs-comment">// 十六位十六进制数作为密钥偏移量  </span><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SECRET_IV</span> = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Utf8</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-string">&quot;e3bbe7e3ba84431a&quot;</span>);  <br>  <br><span class="hljs-comment">// 类型 window.localStorage,window.sessionStorage,  </span><br><span class="hljs-keyword">const</span> config = &#123;  <br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;localStorage&#x27;</span>, <span class="hljs-comment">// 本地存储类型 sessionStorage  </span><br>    <span class="hljs-attr">prefix</span>: <span class="hljs-string">&#x27;SDF_0.0.1&#x27;</span>, <span class="hljs-comment">// 名称前缀 建议：项目名 + 项目版本  </span><br>    <span class="hljs-attr">expire</span>: <span class="hljs-number">1</span>, <span class="hljs-comment">//过期时间 单位：秒  </span><br>    <span class="hljs-attr">isEncrypt</span>: <span class="hljs-literal">true</span> <span class="hljs-comment">// 默认加密 为了调试方便, 开发过程中可以不加密  </span><br>&#125;  <br>  <br><span class="hljs-comment">// 判断是否支持 Storage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">isSupportStorage</span> = (<span class="hljs-params"></span>) =&gt; &#123;  <br>    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> (<span class="hljs-title class_">Storage</span>) !== <span class="hljs-string">&quot;undefined&quot;</span>) ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>  <br>&#125;  <br>  <br><span class="hljs-comment">// 设置 setStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">setStorage</span> = (<span class="hljs-params">key, value, expire = <span class="hljs-number">0</span></span>) =&gt; &#123;  <br>    <span class="hljs-keyword">if</span> (value === <span class="hljs-string">&#x27;&#x27;</span> || value === <span class="hljs-literal">null</span> || value === <span class="hljs-literal">undefined</span>) &#123;  <br>        value = <span class="hljs-literal">null</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(expire) || expire &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Expire must be a number&quot;</span>);  <br>  <br>    expire = (expire ? expire : config.<span class="hljs-property">expire</span>) * <span class="hljs-number">1000</span>;  <br>    <span class="hljs-keyword">let</span> data = &#123;  <br>        <span class="hljs-attr">value</span>: value, <span class="hljs-comment">// 存储值  </span><br>        <span class="hljs-attr">time</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(), <span class="hljs-comment">//存值时间戳  </span><br>        <span class="hljs-attr">expire</span>: expire <span class="hljs-comment">// 过期时间  </span><br>    &#125;  <br>      <br>    <span class="hljs-keyword">const</span> encryptString = config.<span class="hljs-property">isEncrypt</span>   <br>    ? <span class="hljs-title function_">encrypt</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data))  <br>    : <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data);  <br>      <br>    <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">setItem</span>(<span class="hljs-title function_">autoAddPrefix</span>(key), encryptString);  <br>&#125;  <br>  <br><span class="hljs-comment">// 获取 getStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStorage</span> = (<span class="hljs-params">key</span>) =&gt; &#123;  <br>    key = <span class="hljs-title function_">autoAddPrefix</span>(key);  <br>    <span class="hljs-comment">// key 不存在判断  </span><br>    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">getItem</span>(key) || <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(<span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">getItem</span>(key)) === <span class="hljs-string">&#x27;null&#x27;</span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-comment">// 优化 持续使用中续期  </span><br>    <span class="hljs-keyword">const</span> storage = config.<span class="hljs-property">isEncrypt</span>   <br>    ? <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title function_">decrypt</span>(<span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">getItem</span>(key)))   <br>    : <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">getItem</span>(key));  <br>      <br>    <span class="hljs-keyword">let</span> nowTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();  <br>  <br>    <span class="hljs-comment">// 过期删除  </span><br>    <span class="hljs-keyword">if</span> (storage.<span class="hljs-property">expire</span> &amp;&amp; config.<span class="hljs-property">expire</span> * <span class="hljs-number">6000</span> &lt; (nowTime - storage.<span class="hljs-property">time</span>)) &#123;  <br>        <span class="hljs-title function_">removeStorage</span>(key);  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;  <br>    &#125; <span class="hljs-keyword">else</span> &#123;  <br>        <span class="hljs-comment">// 未过期期间被调用 则自动续期 进行保活  </span><br>        <span class="hljs-title function_">setStorage</span>(<span class="hljs-title function_">autoRemovePrefix</span>(key), storage.<span class="hljs-property">value</span>);  <br>        <span class="hljs-keyword">return</span> storage.<span class="hljs-property">value</span>;  <br>    &#125;  <br>&#125;  <br>  <br><span class="hljs-comment">// 是否存在 hasStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">hasStorage</span> = (<span class="hljs-params">key</span>) =&gt; &#123;  <br>    key = <span class="hljs-title function_">autoAddPrefix</span>(key);  <br>    <span class="hljs-keyword">let</span> arr = <span class="hljs-title function_">getStorageAll</span>().<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">item</span>)=&gt;</span>&#123;  <br>        <span class="hljs-keyword">return</span> item.<span class="hljs-property">key</span> === key;  <br>    &#125;)  <br>    <span class="hljs-keyword">return</span> arr.<span class="hljs-property">length</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;  <br>&#125;  <br>  <br><span class="hljs-comment">// 获取所有key  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStorageKeys</span> = (<span class="hljs-params"></span>) =&gt; &#123;  <br>    <span class="hljs-keyword">let</span> items = <span class="hljs-title function_">getStorageAll</span>()  <br>    <span class="hljs-keyword">let</span> keys = []  <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>; index &lt; items.<span class="hljs-property">length</span>; index++) &#123;  <br>        keys.<span class="hljs-title function_">push</span>(items[index].<span class="hljs-property">key</span>)  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> keys  <br>&#125;  <br>  <br><span class="hljs-comment">// 根据索引获取key  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStorageForIndex</span> = (<span class="hljs-params">index</span>) =&gt; &#123;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">key</span>(index)  <br>&#125;  <br>  <br><span class="hljs-comment">// 获取localStorage长度  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStorageLength</span> = (<span class="hljs-params"></span>) =&gt; &#123;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-property">length</span>  <br>&#125;  <br>  <br><span class="hljs-comment">// 获取全部 getAllStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getStorageAll</span> = (<span class="hljs-params"></span>) =&gt; &#123;  <br>    <span class="hljs-keyword">let</span> len = <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-property">length</span> <span class="hljs-comment">// 获取长度  </span><br>    <span class="hljs-keyword">let</span> arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>() <span class="hljs-comment">// 定义数据集  </span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;  <br>        <span class="hljs-comment">// 获取key 索引从0开始  </span><br>        <span class="hljs-keyword">let</span> getKey = <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">key</span>(i)  <br>        <span class="hljs-comment">// 获取key对应的值  </span><br>        <span class="hljs-keyword">let</span> getVal = <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">getItem</span>(getKey)  <br>        <span class="hljs-comment">// 放进数组  </span><br>        arr[i] = &#123;<span class="hljs-string">&#x27;key&#x27;</span>: getKey, <span class="hljs-string">&#x27;val&#x27;</span>: getVal,&#125;  <br>    &#125;  <br>    <span class="hljs-keyword">return</span> arr  <br>&#125;  <br>  <br><span class="hljs-comment">// 删除 removeStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">removeStorage</span> = (<span class="hljs-params">key</span>) =&gt; &#123;  <br>    <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">removeItem</span>(<span class="hljs-title function_">autoAddPrefix</span>(key));  <br>&#125;  <br>  <br><span class="hljs-comment">// 清空 clearStorage  </span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">clearStorage</span> = (<span class="hljs-params"></span>) =&gt; &#123;  <br>    <span class="hljs-variable language_">window</span>[config.<span class="hljs-property">type</span>].<span class="hljs-title function_">clear</span>();  <br>&#125;  <br>  <br><span class="hljs-comment">// 名称前自动添加前缀  </span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">autoAddPrefix</span> = (<span class="hljs-params">key</span>) =&gt; &#123;  <br>    <span class="hljs-keyword">const</span> prefix = config.<span class="hljs-property">prefix</span> ? config.<span class="hljs-property">prefix</span> + <span class="hljs-string">&#x27;_&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>;  <br>    <span class="hljs-keyword">return</span>  prefix + key;  <br>&#125;  <br>  <br><span class="hljs-comment">// 移除已添加的前缀  </span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">autoRemovePrefix</span> = (<span class="hljs-params">key</span>) =&gt; &#123;  <br>    <span class="hljs-keyword">const</span> len = config.<span class="hljs-property">prefix</span> ? config.<span class="hljs-property">prefix</span>.<span class="hljs-property">length</span>+<span class="hljs-number">1</span> : <span class="hljs-string">&#x27;&#x27;</span>;  <br>    <span class="hljs-keyword">return</span> key.<span class="hljs-title function_">substr</span>(len)  <br>    <span class="hljs-comment">// const prefix = config.prefix ? config.prefix + &#x27;_&#x27; : &#x27;&#x27;;  </span><br>    <span class="hljs-comment">// return  prefix + key;  </span><br>&#125;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * 加密方法  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> data  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@returns</span> &#123;<span class="hljs-type">string</span>&#125;  </span><br><span class="hljs-comment"> */</span>  <br><span class="hljs-keyword">const</span> <span class="hljs-title function_">encrypt</span> = (<span class="hljs-params">data</span>) =&gt; &#123;  <br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> data === <span class="hljs-string">&quot;object&quot;</span>) &#123;  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            data = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data);  <br>        &#125; <span class="hljs-keyword">catch</span> (error) &#123;  <br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;encrypt error:&quot;</span>, error);  <br>        &#125;  <br>    &#125;  <br>    <span class="hljs-keyword">const</span> dataHex = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Utf8</span>.<span class="hljs-title function_">parse</span>(data);  <br>    <span class="hljs-keyword">const</span> encrypted = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">AES</span>.<span class="hljs-title function_">encrypt</span>(dataHex, <span class="hljs-variable constant_">SECRET_KEY</span>, &#123;  <br>        <span class="hljs-attr">iv</span>: <span class="hljs-variable constant_">SECRET_IV</span>,  <br>        <span class="hljs-attr">mode</span>: <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">mode</span>.<span class="hljs-property">CBC</span>,  <br>        <span class="hljs-attr">padding</span>: <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">pad</span>.<span class="hljs-property">Pkcs7</span>  <br>    &#125;);  <br>    <span class="hljs-keyword">return</span> encrypted.<span class="hljs-property">ciphertext</span>.<span class="hljs-title function_">toString</span>();  <br>&#125;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * 解密方法  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> data  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@returns</span> &#123;<span class="hljs-type">string</span>&#125;  </span><br><span class="hljs-comment"> */</span>  <br><span class="hljs-keyword">const</span> <span class="hljs-title function_">decrypt</span> = (<span class="hljs-params">data</span>) =&gt; &#123;  <br>    <span class="hljs-keyword">const</span> encryptedHexStr = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Hex</span>.<span class="hljs-title function_">parse</span>(data);  <br>    <span class="hljs-keyword">const</span> str = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Base64</span>.<span class="hljs-title function_">stringify</span>(encryptedHexStr);  <br>    <span class="hljs-keyword">const</span> decrypt = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">AES</span>.<span class="hljs-title function_">decrypt</span>(str, <span class="hljs-variable constant_">SECRET_KEY</span>, &#123;  <br>        <span class="hljs-attr">iv</span>: <span class="hljs-variable constant_">SECRET_IV</span>,  <br>        <span class="hljs-attr">mode</span>: <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">mode</span>.<span class="hljs-property">CBC</span>,  <br>        <span class="hljs-attr">padding</span>: <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">pad</span>.<span class="hljs-property">Pkcs7</span>  <br>    &#125;);  <br>    <span class="hljs-keyword">const</span> decryptedStr = decrypt.<span class="hljs-title function_">toString</span>(<span class="hljs-title class_">CryptoJS</span>.<span class="hljs-property">enc</span>.<span class="hljs-property">Utf8</span>);  <br>    <span class="hljs-keyword">return</span> decryptedStr.<span class="hljs-title function_">toString</span>();  <br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E5%B7%A7%E6%93%8D%E4%BD%9C/">技巧操作</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/09/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/Provide%E3%80%81Inject%E9%80%9A%E4%BF%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Provide、Inject通信</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/07/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/Webpack%E7%9A%84DevServe%E3%80%81VueCLI%E3%80%81Vite/">
+                        <span class="hidden-mobile">DevServe与VueCLI</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

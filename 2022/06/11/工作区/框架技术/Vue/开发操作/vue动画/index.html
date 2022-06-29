@@ -1,0 +1,623 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="#tag vue动画的笔记Vue里面内置一个组件transition很好帮助开发者进行动画的操作 原理 过渡class在进入&#x2F;离开的过渡中，会有 6 个 class 切换。  v-enter-from：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。  v-enter-active：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue动画">
+<meta property="og:url" content="http://example.com/2022/06/11/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/vue%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="Hbisedm">
+<meta property="og:description" content="#tag vue动画的笔记Vue里面内置一个组件transition很好帮助开发者进行动画的操作 原理 过渡class在进入&#x2F;离开的过渡中，会有 6 个 class 切换。  v-enter-from：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。  v-enter-active：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121337916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121343714.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121428616.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121519835.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121511575.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121549249.png">
+<meta property="article:published_time" content="2022-06-11T13:07:41.000Z">
+<meta property="article:modified_time" content="2022-06-12T13:11:19.732Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="动画">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121337916.png">
+  
+  
+  <title>vue动画 - Hbisedm</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","app_key":"iJMI77yt31LAEc08kJwuT12Y","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hbisedm</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/why/">
+                <i class="iconfont icon-user-fill"></i>
+                why
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="vue动画">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-11 21:07" pubdate>
+        June 11, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      63 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vue动画</h1>
+            
+            <div class="markdown-body">
+              <p>#tag</p>
+<h1 id="vue动画的笔记"><a href="#vue动画的笔记" class="headerlink" title="vue动画的笔记"></a>vue动画的笔记</h1><p>Vue里面内置一个组件<code>transition</code>很好帮助开发者进行动画的操作</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121337916.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="过渡class"><a href="#过渡class" class="headerlink" title="过渡class"></a>过渡class</h2><p>在进入&#x2F;离开的过渡中，会有 6 个 class 切换。</p>
+<ol>
+<li><p><code>v-enter-from</code>：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。</p>
+</li>
+<li><p><code>v-enter-active</code>：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡&#x2F;动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。</p>
+</li>
+<li><p><code>v-enter-to</code>：定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 <code>v-enter-from</code> 被移除)，在过渡&#x2F;动画完成之后移除。</p>
+</li>
+<li><p><code>v-leave-from</code>：定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。</p>
+</li>
+<li><p><code>v-leave-active</code>：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡&#x2F;动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。</p>
+</li>
+<li><p><code>v-leave-to</code>：离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 <code>v-leave-from</code> 被移除)，在过渡&#x2F;动画完成之后移除。</p>
+</li>
+</ol>
+<p>这里的每个 class 都将以过渡的名字添加前缀。如果你使用了一个没有名字的 <code>&lt;transition&gt;</code>，则 <code>v-</code> 是这些 class 名的默认前缀。举例来说，如果你使用了 <code>&lt;transition name=&quot;my-transition&quot;&gt;</code>，那么 <code>v-enter-from</code> 会替换为 <code>my-transition-enter-from</code>。</p>
+<p><code>v-enter-active</code> 和 <code>v-leave-active</code> 可以控制进入&#x2F;离开过渡的不同的缓和曲线。</p>
+<p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121343714.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动画class"><a href="#动画class" class="headerlink" title="动画class"></a>动画class</h2><p>从6个class变成只使用2个<code>xxx-enter-active</code>、<code>xxx-leave-active</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.sam-enter-active</span> &#123;<br>    <span class="hljs-attribute">animation</span>: samkeyframes <span class="hljs-number">1s</span> ease-in-out;<br>&#125;<br><span class="hljs-selector-class">.sam-leave-active</span> &#123;<br>    <span class="hljs-attribute">animation</span>: samkeyframes <span class="hljs-number">1s</span> ease-in-out reverse;<br>&#125;<br><br><span class="hljs-keyword">@keyframes</span> samkeyframes &#123;<br>    <span class="hljs-number">0%</span> &#123;<br>        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-number">50%</span> &#123;<br>        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">1.4</span>);<br>    &#125;<br>    <span class="hljs-number">100%</span> &#123;<br>        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="同时使用过渡与动画"><a href="#同时使用过渡与动画" class="headerlink" title="同时使用过渡与动画"></a>同时使用过渡与动画</h2><p>Vue 为了知道过渡何时完成，必须设置相应的事件监听器。它可以是 <code>transitionend</code> 或 <code>animationend</code>，这取决于给元素应用的 CSS 规则。如果你只使用了其中一种，Vue 能自动识别其正确类型。</p>
+<p>但是，在一些场景中，你需要给同一个元素同时设置两种过渡动效，比如有一个通过 Vue 触发的 CSS 动画，并且在悬停时结合一个 CSS 过渡。在这种情况中，你就需要使用 <code>type</code> attribute 并设置 <code>animation</code> 或 <code>transition</code> 来显式声明你需要 Vue 监听的类型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xxx&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;animation or transition&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="显性的过渡持续时间"><a href="#显性的过渡持续时间" class="headerlink" title="显性的过渡持续时间"></a>显性的过渡持续时间</h2><p>在大多数情况下，Vue 可以自动得出过渡效果的完成时机。默认情况下，Vue 会等待其在过渡效果的根元素的第一个 <code>transitionend</code> 或 <code>animationend</code> 事件。然而，有时候这也许不是预期的行为——比如，我们也许拥有一个精心编排的一系列过渡效果，其中一些嵌套的内部元素相比于过渡效果的根元素具有延迟的或更长的过渡效果。</p>
+<p>在这种情况下你可以用 <code>&lt;transition&gt;</code> 组件上的 <code>duration</code> prop 显式指定过渡持续时间 (以毫秒计)：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">:duration</span>=<span class="hljs-string">&quot;1000&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>你也可以分别指定进入和离开的持续时间：</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">:duration</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123; enter: 500, leave: 800 &#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="过渡模式"><a href="#过渡模式" class="headerlink" title="过渡模式"></a>过渡模式</h2><p>当<code>transition</code>组件内有2个组件需要进行切换时，这个2个的显隐是同时进行的，会显的很丑，那么我们想要第一个元素&#x2F;组件隐藏后，再显示第二个元素&#x2F;组件的话。<br>可以使用<code>transition</code>组件的attr：<strong>mode</strong><br>mode有2个值，分别是：</p>
+<ul>
+<li><code>in-out</code>: 新元素先进行进入过渡，完成之后当前元素过渡离开。</li>
+<li><code>out-in</code>: 当前元素先进行离开过渡，完成之后新元素过渡进入。</li>
+</ul>
+<blockquote>
+<p>TIP<br>你很快就会发现 <code>out-in</code> 是你大多数时候想要的状态 😃</p>
+</blockquote>
+<h2 id="appear"><a href="#appear" class="headerlink" title="appear"></a>appear</h2><p>当我们页面加载的第一次是没有动画效果的，但大部分情况我们想要它有渲染到页面这么个动画效果的话。<br>设置<code>transition</code>attr：appear<br>默认是<code>false</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">appear</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="结合Animate-css使用"><a href="#结合Animate-css使用" class="headerlink" title="结合Animate.css使用"></a>结合Animate.css使用</h2><p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121428616.png" srcset="/img/loading.gif" lazyload><br> 终端安装animate依赖<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install animate.css<br></code></pre></td></tr></table></figure><br>main.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./App.vue&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;animate.css&quot;</span>; <span class="hljs-comment">//全局引入</span><br><br><span class="hljs-title function_">createApp</span>(<span class="hljs-title class_">App</span>).<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>在<a target="_blank" rel="noopener" href="https://animate.style/">animate</a>官方上面找自己想要的效果</p>
+<h3 id="用法1"><a href="#用法1" class="headerlink" title="用法1"></a>用法1</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><br><span class="hljs-selector-class">.sam-leave-active</span> &#123;<br>    <span class="hljs-attribute">animation</span>: backOutLeft <span class="hljs-number">1s</span> ease;<br>&#125;<br><span class="hljs-selector-class">.sam-enter-active</span> &#123;<br>    <span class="hljs-attribute">animation</span>: rubberBand <span class="hljs-number">1s</span> ease;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sam&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="用法2"><a href="#用法2" class="headerlink" title="用法2"></a>用法2</h3><p>使用<code>transition</code>的自定义过渡class类名</p>
+<p>我们可以通过以下 attribute 来自定义过渡类名：</p>
+<ul>
+<li><code>enter-from-class</code></li>
+<li><code>enter-active-class</code></li>
+<li><code>enter-to-class</code></li>
+<li><code>leave-from-class</code></li>
+<li><code>leave-active-class</code></li>
+<li><code>leave-to-class</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span></span><br><span class="hljs-tag">	<span class="hljs-attr">enter-active-class</span>=<span class="hljs-string">&quot;animate__animated animate__backInLeft&quot;</span></span><br><span class="hljs-tag">	<span class="hljs-attr">leave-active-class</span>=<span class="hljs-string">&quot;animate__animated animate__backOutLeft&quot;</span>&gt;</span><br>	<span class="hljs-comment">&lt;!-- 元素/组件 --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="动画生命周期"><a href="#动画生命周期" class="headerlink" title="动画生命周期"></a>动画生命周期</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">transition</span> </span><br><span class="hljs-tag">      @<span class="hljs-attr">before-enter</span>=<span class="hljs-string">&quot;beforeEnter&quot;</span></span><br><span class="hljs-tag">      @<span class="hljs-attr">enter</span>=<span class="hljs-string">&quot;enter&quot;</span></span><br><span class="hljs-tag">      @<span class="hljs-attr">after-enter</span>=<span class="hljs-string">&quot;afterEnter&quot;</span></span><br><span class="hljs-tag">      @<span class="hljs-attr">before-leave</span>=<span class="hljs-string">&quot;beforeLeave&quot;</span></span><br><span class="hljs-tag">      @<span class="hljs-attr">leave</span>=<span class="hljs-string">&quot;leave&quot;</span></span><br><span class="hljs-tag">      @<span class="hljs-attr">after-leave</span>=<span class="hljs-string">&quot;afterLeave&quot;</span></span><br><span class="hljs-tag">  &gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;title&quot;</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;show&quot;</span>&gt;</span>hello Sam<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">transition</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">methods</span>: &#123;<br>          <span class="hljs-title function_">beforeEnter</span>(<span class="hljs-params">el</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;beforeEnter&#x27;</span>);<br>          &#125;,<br>          <span class="hljs-title function_">enter</span>(<span class="hljs-params">el, done</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;enter&#x27;</span>);<br>		<span class="hljs-title function_">done</span>()<br>          &#125;,<br>          <span class="hljs-title function_">afterEnter</span>(<span class="hljs-params">el</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;afterEnter&#x27;</span>);<br>          &#125;,<br>          <span class="hljs-title function_">beforeLeave</span>(<span class="hljs-params">el</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;beforeLeave&#x27;</span>);<br>          &#125;,<br>          <span class="hljs-title function_">leave</span>(<span class="hljs-params">el, done</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;leave&#x27;</span>);<br>          	<span class="hljs-title function_">done</span>()<br>	&#125;,<br>          <span class="hljs-title function_">afterLeave</span>(<span class="hljs-params">el</span>) &#123;<br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;afterLeave&#x27;</span>);<br>          &#125;<br>      &#125;<br></code></pre></td></tr></table></figure>
+<p>点击显示&#x2F;隐藏会触发这些钩子函数<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121519835.png" srcset="/img/loading.gif" lazyload></p>
+<p>这些钩子函数可以结合 CSS transitions&#x2F;animations 使用，也可以单独使用。</p>
+<p>当只用 JavaScript 过渡的时候，在 <strong><code>enter</code> 和 <code>leave</code> 钩子中必须使用 <code>done</code> 进行回调</strong>。否则，它们将被同步调用，过渡会立即完成。<strong>添加 <code>:css=&quot;false&quot;</code> 也会让 Vue 会跳过 CSS 的检测，除了性能略高之外，这也可以避免过渡过程中受到 CSS 规则的意外影响。</strong></p>
+<h2 id="gsap"><a href="#gsap" class="headerlink" title="gsap"></a>gsap</h2><p><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121511575.png" srcset="/img/loading.gif" lazyload><br><a target="_blank" rel="noopener" href="https://greensock.com/gsap/">gsap官网</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install gsap<br></code></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><blockquote>
+<p>Vue data状态过渡</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs typescript">&lt;input <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;number&quot;</span> v-model=<span class="hljs-string">&quot;count&quot;</span> step=<span class="hljs-string">&quot;100&quot;</span> /&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>&#123;&#123; newNum.toFixed(0) &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><br><span class="hljs-keyword">import</span> gsap <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gsap&#x27;</span><br>		<span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>            <span class="hljs-keyword">return</span> &#123;<br>                <span class="hljs-attr">show</span>: <span class="hljs-literal">true</span>,<br>                <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>,<br>                <span class="hljs-attr">newNum</span>: <span class="hljs-number">0</span><br>            &#125;<br>        &#125;,<br>        <span class="hljs-attr">watch</span>: &#123;<br>            <span class="hljs-title function_">count</span>(<span class="hljs-params">val</span>) &#123;<br>                gsap.<span class="hljs-title function_">to</span>(<span class="hljs-variable language_">this</span>, &#123;<br>                    <span class="hljs-attr">duration</span>: <span class="hljs-number">1</span>,<br>                    <span class="hljs-attr">newNum</span>: val,<br>                    <span class="hljs-attr">duration</span>: <span class="hljs-number">1</span><br>                &#125;)<br>            &#125;<br>        &#125;,<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/transitions-state.html#%E7%8A%B6%E6%80%81%E5%8A%A8%E7%94%BB%E4%B8%8E%E4%BE%A6%E5%90%AC%E5%99%A8">参考官网</a></p>
+<h2 id="列表的过渡"><a href="#列表的过渡" class="headerlink" title="列表的过渡"></a>列表的过渡</h2><p> transition-group的应用<br><img src="https://raw.githubusercontent.com/Hbisedm/my-blob-picGo/main/img/202206121549249.png" srcset="/img/loading.gif" lazyload><br>实现数字的增加与删除的动画</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;随机添加/删除数字&lt;/p&gt;<br>        &lt;button @click=&quot;addNum&quot;&gt;添加数字&lt;/button&gt;<br>        &lt;button @click=&quot;removeNum&quot;&gt;删除数组&lt;/button&gt;<br>        &lt;transition-group tag=&quot;p&quot; name=&quot;sam&quot;&gt;<br>            &lt;span class=&quot;title&quot; v-for=&quot;item of numbers&quot; :key=&quot;item&quot;&gt;<br>                &#123;&#123; item &#125;&#125;<br>            &lt;/span&gt;<br>        &lt;/transition-group&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>    export default &#123;<br>        name: &#x27;home-a&#x27;,<br>        data() &#123;<br>            return &#123;<br>                show: true,<br>                numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>            &#125;<br>        &#125;,<br>        methods: &#123;<br>            addNum() &#123;<br>                let length = this.numbers.length;<br>                this.numbers.splice(this.randomIndex(), 0, length + 1);<br>            &#125;,<br>            removeNum() &#123;<br>                this.numbers.splice(this.randomIndex(), 1);<br>            &#125;,<br>            randomIndex() &#123;<br>                return Math.floor(Math.random() * this.numbers.length);<br>        &#125;<br>    &#125;<br>&#125;<br>    <br>&lt;/script&gt;<br><br>&lt;style scoped&gt;<br><br>.title &#123;<br>    margin-right: 10px;<br>    display: inline-block;<br>&#125;<br><br>.sam-enter-active, .sam-leave-active &#123;<br>    transition: all 1s ease-in-out;<br>&#125;<br>/* 数字删除时动画，若不设置，被删除的数字会占用那个位置。 */<br>.sam-leave-active &#123;<br>    position: absolute;<br>&#125;<br>.sam-enter-from, .sam-leave-to &#123;<br>    opacity: 0;<br>    transform: translateY(30px);<br>&#125;<br>/* 数字左右移动的动画 */<br>.sam-move &#123; <br>    transition: transform 1s ease-in-out;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/transitions-list.html#%E5%88%97%E8%A1%A8%E7%9A%84%E8%BF%9B%E5%85%A5-%E7%A6%BB%E5%BC%80%E8%BF%87%E6%B8%A1">参考官网</a></p>
+<p>需要注意的是使用 FLIP 过渡的元素不能设置为 <code>display: inline</code>。作为替代方案，可以设置为 <code>display: inline-block</code> 或者将元素放置于 flex 布局中。</p>
+<h3 id="交错的过渡"><a href="#交错的过渡" class="headerlink" title="交错的过渡"></a>交错的过渡</h3><p>交错也就是一个个元素慢慢的离开or进入页面。不是一个个元素同时离开or进入页面。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>    &lt;div&gt;<br>        &lt;input v-model=&quot;keyword&quot; /&gt;<br>    &lt;/div&gt;<br>    &lt;!-- &lt;transition name=&quot;sam&quot;&gt; --&gt;<br>    &lt;transition-group name=&quot;sam&quot; tag=&quot;ul&quot; :css=&quot;false&quot;<br>                        @enter=&quot;enter&quot;<br>                        @leave=&quot;leave&quot;<br>                        @before-enter=&quot;beforeEnter&quot;&gt;<br>            &lt;li v-for=&quot;(item, index) of filterName&quot; :key=&quot;item&quot; :data-index=&quot;index&quot;&gt;<br>                &#123;&#123;item&#125;&#125;<br>            &lt;/li&gt;<br>    &lt;/transition-group&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import gsap from &#x27;gsap&#x27;<br>import gsapCore from &#x27;gsap/gsap-core&#x27;;<br>    export default &#123;<br>        name: &#x27;home-a&#x27;,<br>        data() &#123;<br>            return &#123;<br>                keyword: &#x27;&#x27;,<br>                names: [&#x27;abc&#x27;, &#x27;def&#x27;, &#x27;ghi&#x27;, &#x27;sfa&#x27;, &#x27;ild&#x27;, &#x27;bsw&#x27;, &#x27;fhks&#x27;],<br>            &#125;<br>        &#125;,<br>        computed: &#123;<br>            filterName() &#123;<br>                return this.names.filter(item =&gt; item.includes(this.keyword))<br>            &#125;<br>        &#125;,<br>        methods: &#123;<br>            beforeEnter(el) &#123;<br>                el.style.opacity = 0;<br>                el.style.height = 0;<br>            &#125;,<br>            enter(el, done) &#123;<br>                gsap.to(el, &#123;<br>                    duration: 1,<br>                    height: &#x27;1.5em&#x27;,<br>                    opacity: 1,<br>                    delay: el.dataset.index * 0.1,<br>                    onComplete: done<br>                &#125;)<br>            &#125;,<br>            leave(el, done) &#123;<br>                gsap.to(el, &#123;<br>                    duration: 1,<br>                    height: 0,<br>                    opacity: 0,<br>                    delay: el.dataset.index * 0.1,<br>                    onComplete: done<br>                &#125;)<br>            &#125;,<br>        &#125;<br>    &#125;<br>&lt;/script&gt;<br><br>&lt;style scoped&gt;<br><br>/* .sam-enter-from, .sam-leave-to &#123;<br>    opacity: 0;<br>&#125;<br>.sam-enter-active, .sam-leave-active &#123;<br>    transition: opacity 1s ease;<br>&#125; */<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+<p>使用css没办法做到交错过渡，只能使用js的方式去操作，使用<strong>gsap库</strong>结合<strong>data attr</strong>达到效果。<br>el.dataset的使用与gsap的delay属性。<br><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/transitions-list.html#%E5%88%97%E8%A1%A8%E7%9A%84%E4%BA%A4%E9%94%99%E8%BF%87%E6%B8%A1">官网文档</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E7%94%BB/">动画</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/12/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/Mixin%E4%B8%8Eextends/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mixin与extends</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/10/%E5%B7%A5%E4%BD%9C%E5%8C%BA/%E6%A1%86%E6%9E%B6%E6%8A%80%E6%9C%AF/Vue/%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C/%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6/">
+                        <span class="hidden-mobile">动态组件、异步组件</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"mGYDP7QqwA4Ca7dCSS9lwnFK-gzGzoHsz","appKey":"iJMI77yt31LAEc08kJwuT12Y","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
